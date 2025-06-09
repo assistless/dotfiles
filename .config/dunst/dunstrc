@@ -1,0 +1,113 @@
+[global]
+    # Font used for the notification.
+    font = "JetBrains Mono Nerd 10" # Kept a common font, adjust if needed
+
+    # The format of the notification.
+    #   %a: appname
+    #   %s: summary
+    #   %b: body
+    #   %i: iconname (currently unused)
+    #   %I: iconfile (currently unused)
+    #   %p: progressbar
+    #   %n: progress value
+    #   %v: volume
+    #   %t: timeout
+    #   %d: desktop name
+    #   %id: unique id of the notification
+    #   %idx: unique index of the notification
+    format = "<b>%s</b>\n%b"
+
+    # Show icons in notifications.
+    show_icons = true
+
+    # CHANGE: Smaller maximum icon size
+    max_icon_size = 32 # Changed from typical 48 or 64
+
+    # The maximum height of the notification.
+    max_height = 0
+
+    # The maximum number of notifications that will be kept in history.
+    history_length = 20
+
+    # The maximum number of notifications that can be displayed at once.
+    max_notifications = 5
+
+    # Display notification in a specific monitor.
+    monitor = 0
+
+    # The display side of the notification on the screen.
+    # Possible values: left, center, right
+    origin = top-right
+
+    # Offset from the screen edge.
+    offset = 10x10 # Example offset, adjust as needed
+
+    # The width of the notification window.
+    width = 300
+
+    # The notification frame width.
+    frame_width = 1
+
+    # CHANGE: Rounded corners
+    corner_radius = 8 # Added for rounded corners
+
+    # Transparency percentage (0-100).
+    transparency = 0 # Opaque, for Catppuccin colors to be clear
+
+    # Idle time before notifications are hidden (in seconds).
+    idle_timeout = 2
+
+    # Shrink output if it's smaller than the width.
+    shrink = true
+
+    # Notification sorting (newest/oldest on top).
+    sort = true
+
+    # Don't make notifications appear on top of fullscreen windows.
+    fullscreen = show
+
+    # Enable word wrapping.
+    word_wrap = true
+
+    # Separator height between notifications.
+    separator_height = 2
+
+    # Colors for the separator.
+    separator_color = frame
+
+    # Should the notification be sticky when the mouse is hovered over it.
+    sticky_history = true
+
+    # Should the notification be sticky when the mouse is hovered over it.
+    mouse_left_click = close_current
+    mouse_middle_click = close_all
+    mouse_right_click = do_action
+
+    # Print notification data to stdout.
+    # To use: dunst -print
+    # dmenu like scripts can parse this.
+    # print_format = "%a %s %b"
+
+    highlight = "#cba6f7"
+    progress_bar_corner_radius = 90
+
+[urgency_low]
+    # CHANGE: Catppuccin Mocha Mauve colors for urgency_low
+    background = "#1e1e2e" # Catppuccin Mocha Base
+    foreground = "#cdd6f4" # Catppuccin Mocha Text
+    frame_color = "#45475a" # Catppuccin Mocha Surface1
+    timeout = 10
+
+[urgency_normal]
+    # CHANGE: Catppuccin Mocha Mauve colors for urgency_normal
+    background = "#1e1e2e" # Catppuccin Mocha Base
+    foreground = "#cdd6f4" # Catppuccin Mocha Text
+    frame_color = "#cba6f7" # Catppuccin Mocha Mauve (accent)
+    timeout = 10
+
+[urgency_critical]
+    # CHANGE: Catppuccin Mocha Mauve colors for urgency_critical
+    background = "#f38ba8" # Catppuccin Mocha Red
+    foreground = "#1e1e2e" # Catppuccin Mocha Base (for contrast on red)
+    frame_color = "#f38ba8" # Catppuccin Mocha Red
+    timeout = 0 # Sticky until closed

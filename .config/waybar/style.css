@@ -1,0 +1,374 @@
+/* Catppuccin (Mocha) - Waybar Configuration with Mauve Accent */
+/* Adjusted for better readability on white text */
+
+/* Catppuccin Mocha Palette */
+/* This palette is designed for darker interfaces. */
+
+@define-color rosewater #f5e0dc;
+@define-color flamingo #f2cdcd;
+@define-color pink #f5c2e7;
+@define-color mauve #cba6f7; /* Accent color */
+@define-color red #f38ba8;
+@define-color maroon #eba0ac;
+@define-color peach #fab387;
+@define-color yellow #f9e2af;
+@define-color green #a6e3a1;
+@define-color teal #94e2d5;
+@define-color sky #89dceb;
+@define-color sapphire #74c7ec;
+@define-color blue #89b4fa;
+@define-color lavender #b4befe;
+
+@define-color text #cdd6f4;
+@define-color subtext1 #bac2de;
+@define-color subtext0 #a6adc8;
+@define-color overlay2 #9399b2;
+@define-color overlay1 #7f849c;
+@define-color overlay0 #6c7086;
+@define-color surface2 #585b70;
+@define-color surface1 #45475a;
+@define-color surface0 #313244;
+@define-color base #1e1e2e; /* Base background for most modules */
+@define-color mantle #181825;
+@define-color crust #11111b;
+
+
+* {
+    font-family: Liberation;
+    font-size: 13px;
+}
+
+window#waybar {
+    background-color: @base;
+    color: @base;
+    transition-property: background-color;
+    transition-duration: .5s;
+     box-shadow: inset 0 -3px @mauve;
+}
+
+button {
+    box-shadow: inset 0 -3px @mauve;
+    border: none;
+    border-radius: 0;
+}
+
+button:hover {
+    background: inherit;
+}
+
+#pulseaudio:hover {
+background-color: @yellow;
+color: @crust;
+}
+
+#workspaces button {
+padding-right: 11px;
+background-color: transparent;
+color: @text;
+border-radius: 0px;
+}
+
+#workspaces button:hover {
+background: @surface0; /* Subtle hover effect */
+}
+
+#workspaces button.active {
+background-color: @base; /* Mauve accent for active workspace */
+color: @mauve;
+}
+
+#workspaces button.urgent {
+background-color: @red;
+color: @base;
+}
+
+#mode {
+background-color: @mauve; /* Mauve accent for mode */
+box-shadow: inset 0 -3px @base;
+color: @base;
+}
+
+#clock,
+#battery,
+#cpu,
+#memory,
+#disk,
+#temperature,
+#backlight,
+#network,
+#pulseaudio,
+#wireplumber,
+#custom-media,
+#tray,
+#mode,
+#idle_inhibitor,
+#scratchpad,
+#power-profiles-daemon,
+#window,
+#mpd {
+padding: 0 10px;
+color: @base;
+background-color: @base; /* Changed to @base for better readability */
+}
+
+#window {
+    color: @text;
+    border-radius: 0px;
+     box-shadow: inset 0 -3px @mauve;
+}
+#workspaces {
+margin: 0 4px;
+}
+
+/* If workspaces is the leftmost module, omit left margin */
+.modules-left > widget:first-child > #workspaces {
+    margin-left: 0;
+}
+
+/* If workspaces is the rightmost module, omit right margin */
+.modules-right > widget:last-child > #workspaces {
+    margin-right: 0;
+}
+
+#clock {
+background-color: @base;
+color: @lavender;
+box-shadow: inset 0 -3px @mauve;
+border-radius: 0px;
+}
+
+#battery {
+background-color: @teal;
+color: @base;
+box-shadow: inset 0 -3px @mauve;
+border-radius: 0px;
+}
+
+#battery.charging, #battery.plugged {
+color: @green;
+background-color: @base;
+}
+
+@keyframes blink {
+    to {
+        background-color: @mauve; /* Mauve accent for critical battery blink */
+        color: @base;
+    }
+}
+
+#battery.critical:not(.charging) {
+background-color: @base;
+color: @red;
+animation-name: blink;
+animation-duration: 0.5s;
+animation-timing-function: steps(12);
+animation-iteration-count: infinite;
+animation-direction: alternate;
+}
+
+#power-profiles-daemon {
+padding-right: 11px;
+}
+
+#power-profiles-daemon.performance {
+background-color: @red;
+color: @base;
+}
+
+#power-profiles-daemon.balanced {
+background-color: @blue;
+color: @base;
+}
+
+#power-profiles-daemon.power-saver {
+background-color: @green;
+color: @base;
+}
+
+label:focus {
+    background-color: @crust;
+}
+
+#cpu {
+background-color: @green;
+color: @base;
+}
+
+#memory {
+background-color: @pink;
+color: @base;
+}
+
+#disk {
+background-color: @yellow;
+color: @base;
+}
+
+#backlight {
+background-color: @sky;
+color: @base;
+}
+
+#network {
+background-color: @base;
+color: @blue;
+padding-right: 15px;
+box-shadow: inset 0 -3px @mauve;
+border-radius: 0px;
+}
+
+#network.disconnected {
+background-color: @red;
+color: @base;
+}
+
+#pulseaudio {
+background-color: @base;
+color: @peach;
+padding-right: 15px;
+box-shadow: inset 0 -3px @mauve;
+border-radius: 0px;
+}
+
+#pulseaudio.muted {
+background-color: @surface0;
+color: @subtext0;
+}
+
+#wireplumber {
+background-color: @flamingo;
+color: @base;
+}
+
+#wireplumber.muted {
+background-color: @red;
+color: @base;
+}
+
+#custom-media {
+background-color: @green;
+color: @base;
+min-width: 100px;
+}
+
+#custom-media.custom-spotify {
+background-color: @green;
+}
+
+#custom-media.custom-vlc {
+background-color: @peach; /* Uses Peach for VLC */
+color: @base;
+}
+
+#temperature {
+background-color: @red;
+color: @base;
+}
+
+#temperature.critical {
+background-color: @maroon;
+color: @base;
+}
+
+#tray {
+background-color: @base;
+box-shadow: inset 0 -3px @mauve;
+}
+
+#tray > .passive {
+-gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+-gtk-icon-effect: highlight;
+background-color: @red;
+}
+#idle_inhibitor {
+background-color: @crust;
+color: @text;
+padding-right: 16px;
+}
+
+#idle_inhibitor.activated {
+background-color: @mauve; /* Mauve accent when activated */
+color: @base;
+}
+
+#mpd {
+background-color: @green;
+color: @base;
+}
+
+#mpd.disconnected {
+background-color: @red;
+color: @base;
+}
+
+#mpd.stopped {
+background-color: @surface0;
+color: @subtext0;
+}
+
+#mpd.paused {
+background-color: @teal;
+color: @base;
+}
+
+#language {
+background: @blue;
+color: @base;
+padding: 0 5px;
+margin: 0 5px;
+min-width: 16px;
+}
+
+#keyboard-state {
+background: @lavender;
+color: @base;
+padding: 0 0px;
+margin: 0 5px;
+min-width: 16px;
+}
+
+#keyboard-state > label {
+padding: 0 5px;
+}
+
+#keyboard-state > label.locked {
+background: @surface0;
+}
+
+#scratchpad {
+background: @surface1;
+color: @base;
+}
+
+#scratchpad.empty {
+background-color: transparent;
+}
+
+#privacy {
+padding: 0;
+}
+
+#privacy-item {
+padding: 0 5px;
+color: @base;
+}
+
+#privacy-item.screenshare {
+background-color: @peach;
+}
+
+#privacy-item.audio-in {
+background-color: @green;
+}
+
+#privacy-item.audio-out {
+background-color: @blue;
+}
+
+#custom-power {
+    color: @text;
+    padding-left: 5px;
+}
