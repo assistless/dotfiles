@@ -21,7 +21,7 @@
 
 * {
     // FONT CHANGE HERE
-    font: "JetBrains Mono Nerd 13";
+    font: "JetBrainsMono Nerd Font 13";
     g-spacing: 10px;
     g-margin: 0;
 

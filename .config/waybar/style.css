@@ -34,7 +34,7 @@
 
 
 * {
-    font-family: Liberation;
+    font-family: JetBrainsMono Nerd Font;
     font-size: 13px;
 }
 
@@ -371,4 +371,7 @@ background-color: @blue;
 #custom-power {
     color: @text;
     padding-left: 5px;
+}
+#custom-notifications {
+  color: @text
 }
