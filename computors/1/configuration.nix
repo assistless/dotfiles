@@ -15,8 +15,8 @@ in
   # EFI boot
   boot.loader.systemd-boot = {
     enable = true;
-     configurationLimit = 5;
-  }
+    configurationLimit = 5;
+  };
   boot.loader.efi.canTouchEfiVariables = true;
 
   # Btrfs with compression
