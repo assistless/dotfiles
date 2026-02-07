@@ -103,12 +103,6 @@ in
     });
     colorScheme = lib.mkForce "mocha";
   };
-  programs.git = {
-    settings = {
-      user.name = "Demi";
-      user.email = "assistless@proton.me";
-    };
-  };
   programs.niri = {
     config = builtins.readFile ./niri.kdl;
   };

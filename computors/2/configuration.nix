@@ -9,7 +9,7 @@ in
     ../../modules/desktop.nix
   ];
 
-  networking.hostName = "secondary-machine";
+  networking.hostName = "lenovo";
 
   # BIOS boot (adjust device to your actual disk)
   boot.loader.grub = {
