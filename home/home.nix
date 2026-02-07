@@ -33,7 +33,6 @@ in
     ripgrep
     fd
     unzip
-    fzf
     python3
     nodejs
     kdePackages.qtdeclarative

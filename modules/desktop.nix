@@ -47,14 +47,7 @@ in
     ];
   };
 
-  programs.hyprland = {
-    enable = true;
-    package = inputs.hyprland.packages.${system}.hyprland;
-    portalPackage = inputs.hyprland.packages.${system}.xdg-desktop-portal-hyprland;
-  };
-
   niri-flake.cache.enable = true;
-  nixpkgs.overlays = [ inputs.niri.overlays.niri ];
   programs.niri = {
     enable = true;
     package = pkgs.niri;
