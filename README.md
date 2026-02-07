@@ -1,3 +1,5 @@
+> Proudly sponsored by Claude.
+
 # NixOS Configuration
 
 Multi-machine NixOS configuration using flakes.
