@@ -127,7 +127,7 @@ in
   programs.fish = {
     enable = true;
     shellAliases = {
-      rebuildNixOS = "sudo nixos-rebuild";
+      rebuildNixOS = "bash ~/dotfiles/rebuild.sh";
       editConfig = "$EDITOR /etc/nixos/";
     }; 
     functions = {
