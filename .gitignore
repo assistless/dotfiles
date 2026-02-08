@@ -3,4 +3,3 @@ result
 *.swo
 *~
 .DS_Store
-flake.lock
