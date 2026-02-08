@@ -11,19 +11,15 @@ in
 
   networking.hostName = "lenovo";
 
-  # BIOS boot (adjust device to your actual disk)
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
   boot.loader.grub = {
     enable = true;
     device = "/dev/sda";
     configurationLimit = 5;
   };
 
-  # ext4 filesystems (no special options needed)
-  # hardware-configuration.nix will have the actual mount points
-
-  # 16GB swap partition
   swapDevices = [
-    { device = "/dev/sda2"; }  # Adjust to your actual swap partition
+    { device = "/dev/sda2"; }  
   ];
 
   system.stateVersion = "25.11";
