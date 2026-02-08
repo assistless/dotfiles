@@ -46,6 +46,7 @@ in
     heroic
     inputs.awww.packages.${system}.awww
     chromium
+    kdePackages.konsole
   ];
 
   services.xembed-sni-proxy.enable = true;
