@@ -51,7 +51,7 @@ in
     nil
     virt-manager
     virt-viewer
-    86Box
+    _86Box
     dosbox-staging
     quickemu
     looking-glass-client
