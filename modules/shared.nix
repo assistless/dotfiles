@@ -9,10 +9,18 @@
     font = "Lat2-Terminus16";
     keyMap = "us";
   };
+  virtualisation.libvirtd = {
+    enable = true;
+    qemu = {
+      package = pkgs.qemu_kvm;
+      ovmf.enable = true;
+      swtpm.enable = true;
+    };
+  };
 
   users.users.demi = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "uinput" ];
+    extraGroups = [ "wheel" "uinput" "libvirtd" ];
   };
 
   services.openssh.enable = true;

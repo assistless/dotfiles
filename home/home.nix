@@ -47,8 +47,14 @@ in
     inputs.awww.packages.${system}.awww
     chromium
     kdePackages.konsole
-    kdePackages.discover
+    gnome-software
     nil
+    virt-manager
+    virt-viewer
+    86Box
+    dosbox-staging
+    quickemu
+    looking-glass-client
   ];
 
   services.xembed-sni-proxy.enable = true;
