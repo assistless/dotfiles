@@ -333,7 +333,7 @@ binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
-    Mod+Return hotkey-overlay-title="Open a Terminal" { spawn "kitty"; }
+    Mod+Return hotkey-overlay-title="Open a Terminal" { spawn-sh "bash ~/dotfiles/terminal.sh"; }
     Mod+Space hotkey-overlay-title="Run an Application" { spawn "fuzzel"; }
 
     // Example volume keys mappings for PipeWire & WirePlumber.
