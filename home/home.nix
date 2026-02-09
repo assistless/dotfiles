@@ -47,6 +47,8 @@ in
     inputs.awww.packages.${system}.awww
     chromium
     kdePackages.konsole
+    kdePackages.discover
+    nil
   ];
 
   services.xembed-sni-proxy.enable = true;
