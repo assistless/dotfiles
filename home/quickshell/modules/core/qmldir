@@ -1,3 +1,0 @@
-module modules.core
-singleton Config 1.0 Config.qml
-singleton Hypr 1.0 Hypr.qml
