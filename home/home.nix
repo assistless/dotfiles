@@ -43,7 +43,6 @@ in
     godot
     blender
     xwayland-satellite
-    heroic
     inputs.awww.packages.${system}.awww
     chromium
     kdePackages.konsole
