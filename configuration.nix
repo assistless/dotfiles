@@ -5,9 +5,9 @@ in
 {
   imports = [
     ./hardware-configuration.nix
-    ../../modules/common.nix
-    ../../modules/gaming.nix
-    ../../modules/desktop.nix
+    /modules/common.nix
+    /modules/gaming.nix
+    /modules/desktop.nix
   ];
 
   networking.hostName = "dell";
