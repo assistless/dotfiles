@@ -27,27 +27,12 @@
   };
 
   outputs = {nixpkgs, home-manager, stylix, nix-flatpak, niri, ...} @ inputs: {
-    # Main machine (EFI + Btrfs + Windows)
     nixosConfigurations.dell = nixpkgs.lib.nixosSystem {
       specialArgs = { inherit inputs; };
       modules = [
         niri.nixosModules.niri
         stylix.nixosModules.stylix
-        ./computors/1/configuration.nix
-        ./stylix.nix
-        home-manager.nixosModules.home-manager
-        {
-          home-manager.extraSpecialArgs = { inherit inputs; };
-          home-manager.users.demi = ./home/home.nix;
-        }
-      ];
-    };
-    nixosConfigurations.lenovo = nixpkgs.lib.nixosSystem {
-      specialArgs = { inherit inputs; };
-      modules = [
-        niri.nixosModules.niri
-        stylix.nixosModules.stylix
-        ./computors/2/configuration.nix
+        ./configuration.nix
         ./stylix.nix
         home-manager.nixosModules.home-manager
         {

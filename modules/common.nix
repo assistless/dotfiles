@@ -5,6 +5,31 @@
   time.timeZone = "Asia/Ho_Chi_Minh";
   i18n.defaultLocale = "en_US.UTF-8";
 
+  boot.kernelModules = [ "uinput" ];
+  boot.plymouth.enable = true;
+  boot.kernelPackages = pkgs.linuxPackages_zen.extend (kself: ksuper: {
+  kernel = ksuper.kernel.override {
+    structuredExtraConfig = {
+      NTSYNC = true; # Enables NTSYNC
+    };
+  };
+});
+  boot.kernel.sysctl = {
+    "vm.swappiness" = 30;
+  };
+
+  hardware.uinput.enable = true;
+  hardware.bluetooth.enable = true;
+  services.blueman.enable = true;
+  services.upower.enable = true;
+  services.libinput.enable = true;
+
+  services.udev.extraRules = ''
+    KERNEL=="uinput", MODE="0660", GROUP="uinput", OPTIONS+="static_node=uinput"
+  '';
+
+  users.groups.uinput = {};
+
   console = {
     font = "Lat2-Terminus16";
     keyMap = "us";

@@ -5,7 +5,7 @@ in
 {
   imports = [
     ./hardware-configuration.nix
-    ../../modules/shared.nix
+    ../../modules/common.nix
     ../../modules/gaming.nix
     ../../modules/desktop.nix
   ];
