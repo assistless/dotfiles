@@ -24,18 +24,6 @@ in
     "/".options = [ "compress=zstd" ];
     "/home".options = [ "compress=zstd" ];
     "/nix".options = [ "compress=zstd" "noatime" ];
-    "/windows" = {
-      device = "/dev/sda3";
-      fsType = "ntfs-3g";
-      options = [
-        "rw"
-        "uid=1000"
-        "gid=100"
-        "dmask=022"
-        "fmask=133"
-        "windows_names"
-      ];
-    };
   };
 
   # Swap file
