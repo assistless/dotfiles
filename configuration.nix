@@ -10,7 +10,7 @@ in
     ./modules/desktop.nix
   ];
 
-  networking.hostName = "dell";
+  networking.hostName = "nixos";
 
   # EFI boot
   boot.loader.systemd-boot = {
@@ -45,6 +45,6 @@ in
   }];
 
   services.btrfs.autoScrub.enable = true;
-
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
   system.stateVersion = "25.11";
 }

@@ -27,7 +27,7 @@
   };
 
   outputs = {nixpkgs, home-manager, stylix, nix-flatpak, niri, ...} @ inputs: {
-    nixosConfigurations.dell = nixpkgs.lib.nixosSystem {
+    nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
       specialArgs = { inherit inputs; };
       modules = [
         niri.nixosModules.niri
