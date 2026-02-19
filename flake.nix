@@ -27,18 +27,32 @@
   };
 
   outputs = {nixpkgs, home-manager, stylix, nix-flatpak, niri, ...} @ inputs: {
-    nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+    nixosConfigurations.sys1 = nixpkgs.lib.nixosSystem {
       specialArgs = { inherit inputs; };
       modules = [
-        niri.nixosModules.niri
+       # niri.nixosModules.niri
         stylix.nixosModules.stylix
-        ./configuration.nix
+        ./systems/1/configuration.nix
         ./stylix.nix
         home-manager.nixosModules.home-manager
         {
           home-manager.extraSpecialArgs = { inherit inputs; };
           home-manager.users.demi = ./home/home.nix;
         }
+      ];
+    };
+    nixosConfigurations.sys2 = nixpkgs.lib.nixosSystem {
+      specialArgs = { inherit inputs; };
+      modules = [
+       # niri.nixosModules.niri
+	stylix.nixosModules.stylix
+	./systems/2/configuration.nix
+	./stylix.nix
+	home-manager.nixosModules.home-manager
+	{
+	  home-manager.extraSpecialArgs = { inherit inputs; };
+	  home-manager.users.demi = ./home/home.nix;
+	}
       ];
     };
   };

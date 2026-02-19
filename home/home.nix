@@ -54,6 +54,7 @@ in
     dosbox-staging
     quickemu
     looking-glass-client
+    javaPackages.compiler.temurin-bin.jre-21
   ];
 
   services.xembed-sni-proxy.enable = true;
@@ -111,9 +112,6 @@ in
     });
     colorScheme = lib.mkForce "mocha";
   };
-  programs.niri = {
-    config = builtins.readFile ./niri.kdl;
-  };
 
   wayland.windowManager.hyprland.systemd.enable = true;
   programs.kitty = {
@@ -158,6 +156,7 @@ in
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
   home.file = {
+    ".config/niri/config.kdl".source = ./niri.kdl;
   };
   
   systemd.user.sessionVariables = config.home.sessionVariables;
