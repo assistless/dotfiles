@@ -5,19 +5,19 @@ in
 {
   imports = [
     ./hardware-configuration.nix
-    ./modules/common.nix
-    ./modules/gaming.nix
-    ./modules/desktop.nix
+    ../../modules/common.nix
+    ../../modules/gaming.nix
+    ../../modules/desktop.nix
   ];
 
   networking.hostName = "nixos";
-
+  networking.firewall.enable = false;
   # EFI boot
-  boot.loader.systemd-boot = {
+  boot.loader.grub = {
     enable = true;
     configurationLimit = 5;
+    device = "/dev/sda";
   };
-  boot.loader.efi.canTouchEfiVariables = true;
 
   # Btrfs with compression
   fileSystems = {

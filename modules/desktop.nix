@@ -4,8 +4,8 @@ let
 in
 {
 
-  services.displayManager.gdm.enable = true;
-
+  services.displayManager.sddm.enable = true;
+  services.xserver.enable = true;
   programs.appimage = {
     enable = true;
     binfmt = true;
@@ -30,7 +30,6 @@ in
 
   programs.niri = {
     enable = true;
-    package = pkgs.niri;
   };
 
   services.gvfs.enable = true;
