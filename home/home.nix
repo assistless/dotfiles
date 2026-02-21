@@ -180,6 +180,7 @@ in
   home.sessionVariables = {
     EDITOR = "kate";
     TZ = "Asia/Ho_Chi_Minh";
+    QT_STYLE_OVERRIDE = "Fusion"
   };
 
   # Let Home Manager install and manage itself.
