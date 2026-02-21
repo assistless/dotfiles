@@ -159,7 +159,9 @@ in
     ".config/niri/config.kdl".source = ./niri.kdl;
   };
   
-  systemd.user.sessionVariables = config.home.sessionVariables;
+  systemd.user.sessionVariables = config.home.sessionVariables // {
+    QT_STYLE_OVERRIDE = lib.mkForce "Fusion";
+  };
 
   # Home Manager can also manage your environment variables through
   # 'home.sessionVariables'. These will be explicitly sourced when using a
@@ -180,7 +182,6 @@ in
   home.sessionVariables = {
     EDITOR = "kate";
     TZ = "Asia/Ho_Chi_Minh";
-    QT_STYLE_OVERRIDE = "Fusion"
   };
 
   # Let Home Manager install and manage itself.
