@@ -55,6 +55,8 @@ in
     quickemu
     looking-glass-client
     javaPackages.compiler.temurin-bin.jre-21
+    pavucontrol
+    android-file-transfer
   ];
 
   services.xembed-sni-proxy.enable = true;
