@@ -57,6 +57,9 @@ in
     javaPackages.compiler.temurin-bin.jre-21
     pavucontrol
     android-file-transfer
+    brightnessctl
+    spotdl
+    llvmPackages_20.clang-tools
   ];
 
   services.xembed-sni-proxy.enable = true;
