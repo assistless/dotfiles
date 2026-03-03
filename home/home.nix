@@ -60,6 +60,11 @@ in
     brightnessctl
     spotdl
     llvmPackages_20.clang-tools
+    fcitx5
+    fcitx5-gtk
+    kdePackages.fcitx5-unikey
+    kdePackages.fcitx5-qt
+    kdePackages.fcitx5-configtool
   ];
 
   services.xembed-sni-proxy.enable = true;
