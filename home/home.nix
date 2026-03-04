@@ -1,11 +1,10 @@
-{ config, pkgs, inputs, lib, ... }:
+{ config, pkgs, inputs, lib, self, ... }:
 let
   spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.stdenv.system};
   system = "x86_64-linux";
 in
 {
   imports = [
-    inputs.nix-flatpak.homeManagerModules.nix-flatpak
     inputs.spicetify-nix.homeManagerModules.spicetify
   ];
   # Home Manager needs a bit of information about you and the paths it should
@@ -74,48 +73,6 @@ in
       hidePodcasts
       shuffle
     ];
-    theme = lib.mkForce (spicePkgs.themes.catppuccin // {
-    appendName = true;
-    additionalCss = ''
-      *
-      ::before
-      ::after {
-        font-family: "Maple Mono NF CN", sans-serif !important;
-        font-weight: 400; /* Regular */
-      }
-      body,
-      html {
-        font-family: "Maple Mono NF CN", sans-serif !important;
-        font-weight: 400; /* Regular */
-      }
-
-      .main-entityHeader-title,
-      .main-entityHeader-titleText {
-        font-family: "Maple Mono NF CN", sans-serif !  important;
-        font-weight: 700; /* Bold */
-      }
-
-      .main-trackList-trackName,
-      .main-trackList-rowTitle {
-        font-family: "Maple Mono NF CN", sans-serif !important;
-        font-weight: 400; /* Regular */
-      }
-
-      button,
-      .main-buttons-button,
-      .main-playButton-PlayButton {
-        font-family: "Maple Mono NF CN", sans-serif !important;
-        font-weight: 800; /* ExtraBold */
-      }
-
-      h1, h2, h3,
-      .main-shelf-header {
-        font-family: "Maple Mono NF CN", sans-serif !  important;
-        font-weight: 900; /* Ultra */
-      }
-      '';
-    });
-    colorScheme = lib.mkForce "mocha";
   };
 
   wayland.windowManager.hyprland.systemd.enable = true;
@@ -132,7 +89,6 @@ in
     enable = true;
     shellAliases = {
       rebuildNixOS = "bash ~/dotfiles/rebuild.sh";
-      editConfig = "$EDITOR /etc/nixos/";
     }; 
     functions = {
       fish_prompt = ''
@@ -143,12 +99,18 @@ in
       
         # Your regular prompt
         echo -n (set_color cyan)(prompt_pwd)(set_color normal)' > '
-        '';
-      };
+      '';
     };
+   };
   programs.quickshell = {
     enable = true;
     package = inputs.qml-niri.packages.${system}.quickshell;
+  };
+
+  catppuccin = {
+    enable = true;
+    flavor = "mocha";
+    accent = "green";
   };
 
   nixpkgs.config.allowUnfree = true;
@@ -161,12 +123,11 @@ in
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
   home.file = {
-    ".config/niri/config.kdl".source = ./niri.kdl;
+    ".config/niri/config.kdl".source = config.lib.file.mkOutOfStoreSymlink "${self}/home/niri.kdl";
+    ".config/quickshell".source = config.lib.file.mkOutOfStoreSymlink "${self}/home/quickshell";
   };
   
-  systemd.user.sessionVariables = config.home.sessionVariables // {
-    QT_STYLE_OVERRIDE = lib.mkForce "Fusion";
-  };
+  systemd.user.sessionVariables = config.home.sessionVariables;
 
   # Home Manager can also manage your environment variables through
   # 'home.sessionVariables'. These will be explicitly sourced when using a

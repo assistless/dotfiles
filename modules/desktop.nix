@@ -28,17 +28,24 @@ in
     ];
   };
   i18n.inputMethod = {
-  enable = true;
-  type = "fcitx5";
-  fcitx5 = {
-    waylandFrontend = true;
-    addons = with pkgs; [
-      fcitx5-gtk
-      kdePackages.fcitx5-qt
-      fcitx5-bamboo
-    ];
+    enable = true;
+    type = "fcitx5";
+    fcitx5 = {
+      waylandFrontend = true;
+      addons = with pkgs; [
+        fcitx5-gtk
+        kdePackages.fcitx5-qt
+        fcitx5-bamboo
+      ];
+    };
   };
-};
+
+  catppuccin = {
+    enable = true;
+    flavor = "mocha";
+    accent = "green";
+  };
+
   programs.niri = {
     enable = true;
   };
