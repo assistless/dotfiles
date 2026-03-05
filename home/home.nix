@@ -59,6 +59,7 @@ in
     spotdl
     llvmPackages_20.clang-tools
     kdePackages.qtstyleplugin-kvantum
+    catppuccin-gtk
   ];
 
   services.xembed-sni-proxy.enable = true;
@@ -115,8 +116,16 @@ in
 
   catppuccin = {
     enable = true;
-    flavor = "mocha";
+    flavor = "latte";
     accent = "green";
+  };
+
+
+  dconf.settings = {
+    "org/gnome/desktop/interface" = {
+      color-scheme = "prefer-light";
+      gtk-theme = "catppuccin-latte-green-standard+default";
+    };
   };
 
   nixpkgs.config.allowUnfree = true;

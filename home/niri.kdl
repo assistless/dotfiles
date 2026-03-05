@@ -80,7 +80,7 @@ input {
 // https://yalter.github.io/niri/Configuration:-Layout
 layout {
     // Set gaps around windows in logical pixels.
-    gaps 8
+    gaps 5
 
     // When to center a column when changing focus, options are:
     // - "never", default behavior, focusing an off-screen column will keep at the left
@@ -166,7 +166,7 @@ layout {
         // If you enable the border, you probably want to disable the focus ring.
         // off
 
-        width 2
+        width 3
         active-color "#40a02b"
         inactive-color "#1e1e2e"
 
@@ -272,22 +272,13 @@ animations {
     // off
 
     // Slow down all animations by this factor. Values below 1 speed them up instead.
-    // slowdown 3.0
+    slowdown 1.75
 }
 
 // Window rules let you adjust behavior for individual windows.
 // Find more information on the wiki:
 // https://yalter.github.io/niri/Configuration:-Window-Rules
 
-// Work around WezTerm's initial configure bug
-// by setting an empty default-column-width.
-window-rule {
-    // This regular expression is intentionally made as specific as possible,
-    // since this is the default config, and we want no false positives.
-    // You can get away with just app-id="wezterm" if you want.
-    match app-id=r#"^org\.wezfurlong\.wezterm$"#
-    default-column-width {}
-}
 
 // Open the Firefox picture-in-picture player as floating by default.
 window-rule {
@@ -300,7 +291,7 @@ window-rule {
 
 // Example: block out two password managers from screen capture.
 // (This example rule is commented out with a "/-" in front.)
-/-window-rule {
+window-rule {
     match app-id=r#"^org\.keepassxc\.KeePassXC$"#
     match app-id=r#"^org\.gnome\.World\.Secrets$"#
 
@@ -313,7 +304,7 @@ window-rule {
 // Example: enable rounded corners for all windows.
 // (This example rule is commented out with a "/-" in front.)
 window-rule {
-    geometry-corner-radius 10
+    geometry-corner-radius 8
     clip-to-geometry true
 }
 
@@ -423,8 +414,8 @@ binds {
     // To avoid scrolling through workspaces really fast, you can use
     // the cooldown-ms property. The bind will be rate-limited to this value.
     // You can set a cooldown on any bind, but it's most useful for the wheel.
-    Mod+Ctrl+WheelScrollDown      cooldown-ms=150 { focus-workspace-down; }
-    Mod+Ctrl+WheelScrollUp        cooldown-ms=150 { focus-workspace-up; }
+    Mod+Ctrl+WheelScrollDown      cooldown-ms=100 { focus-workspace-down; }
+    Mod+Ctrl+WheelScrollUp        cooldown-ms=100 { focus-workspace-up; }
     Mod+Ctrl+Shift+WheelScrollDown cooldown-ms=150 { move-column-to-workspace-down; }
     Mod+Ctrl+Shift+WheelScrollUp   cooldown-ms=150 { move-column-to-workspace-up; }
 
@@ -494,7 +485,7 @@ binds {
     Mod+Shift+R { switch-preset-window-height; }
     Mod+Ctrl+R { reset-window-height; }
     Mod+F { maximize-column; }
-    Mod+Shift+F { fullscreen-window; }
+    Mod+Shift+F allow-inhibiting=false { fullscreen-window; }
 
     // While maximize-column leaves gaps and borders around the window,
     // maximize-window-to-edges doesn't: the window expands to the edges of the screen.

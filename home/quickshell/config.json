@@ -1,0 +1,14 @@
+{
+  "bar": {
+    "size": 30,
+    "radius": 15,
+    "edges": 0
+  },
+  "theme": {
+    "mode": "light",
+    "accent": "green"
+  },
+  "wallpaper": {
+    "path": ""
+  }
+}
