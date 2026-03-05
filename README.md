@@ -1,4 +1,4 @@
-> Proudly sponsored by Claude.
+> The folloing is sponsored by Claude. I am too lazy to write my own.
 
 # NixOS Configuration
 
