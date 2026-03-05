@@ -40,9 +40,28 @@ in
     };
   };
 
+  fonts = {
+    enableDefaultPackages = lib.mkForce false;
+    packages = with pkgs; [ maple-mono.NF-CN noto-fonts-color-emoji noto-fonts-cjk-sans noto-fonts ];
+    fontconfig = {
+      antialias = true;
+      includeUserConf = false;
+      hinting = {
+        enable = true;
+        style = "full";
+      };
+      subpixel = {
+        lcdfilter = "default";
+        rgba = "none";
+      };
+      defaultFonts = let font = [ "Maple Mono NF CN" ];
+        in { serif = font; sansSerif = font; monospace = font; };
+    };
+  };
+
   catppuccin = {
     enable = true;
-    flavor = "mocha";
+    flavor = "latte";
     accent = "green";
   };
 

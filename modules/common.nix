@@ -93,27 +93,10 @@
     };
   };
 
-  fonts = {
-    enableDefaultPackages = lib.mkForce false;
-    packages = with pkgs; [
-      maple-mono.NF-CN
-      noto-fonts
-      noto-fonts-cjk-sans
-      noto-fonts-color-emoji
-      nerd-fonts.symbols-only
-    ];
-    fontconfig = {
-      antialias = true;
-      includeUserConf = false;
-      hinting = {
-        enable = true;
-        style = "full";
-      };
-      subpixel = {
-        lcdfilter = "default";
-        rgba = "none";
-      };
-    };
+
+  environment.sessionVariables = {
+    FREETYPE_PROPERTIES = "autofitter:no-stem-darkening=0 autofitter:darkening-parameters=500,0,1000,500,2500,500,4000,0 cff:no-stem-darkening=0 type1:no-stem-darkening=0 t1cid:no-stem-darkening=0";
+    QT_NO_SYNTHESIZED_BOLD = 1;
   };
 
   environment.systemPackages = with pkgs; [

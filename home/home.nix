@@ -24,7 +24,6 @@ in
   # environment.
   home.packages = with pkgs; [
     wl-clipboard 
-    papirus-icon-theme
     kdePackages.ark
     nwg-look
     kdePackages.kate
@@ -59,6 +58,7 @@ in
     brightnessctl
     spotdl
     llvmPackages_20.clang-tools
+    kdePackages.qtstyleplugin-kvantum
   ];
 
   services.xembed-sni-proxy.enable = true;
@@ -82,7 +82,13 @@ in
     extraConfig = "shell fish";
   };
   programs.fuzzel.enable = true;
-  programs.firefox.enable = true;
+  programs.firefox = {
+    enable = true;
+    profiles.default = {
+      name = "default";
+      extensions.force = true;
+    };
+  };
   services.hyprpolkitagent.enable = true;
   programs.wlogout.enable = true;
   programs.fish = {
@@ -119,12 +125,17 @@ in
     enable = true;
     createDirectories = true;
   };
-
+  gtk.enable = true;
+  qt = {
+  enable = true;
+  platformTheme.name = "kvantum";
+  style.name = "kvantum";
+};
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
   home.file = {
-    ".config/niri/config.kdl".source = config.lib.file.mkOutOfStoreSymlink "${self}/home/niri.kdl";
-    ".config/quickshell".source = config.lib.file.mkOutOfStoreSymlink "${self}/home/quickshell";
+    ".config/niri/config.kdl".source = config.lib.file.mkOutOfStoreSymlink "/home/demi/dotfiles/home/niri.kdl";
+    ".config/quickshell".source = config.lib.file.mkOutOfStoreSymlink "/home/demi/dotfiles/home/quickshell";
   };
   
   systemd.user.sessionVariables = config.home.sessionVariables;
