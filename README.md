@@ -1,4 +1,4 @@
-> The folloing is sponsored by Claude. I am too lazy to write my own.
+> The folloing is written by Claude. I am too lazy to write my own for now.
 
 # NixOS Configuration
 

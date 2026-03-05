@@ -1,7 +1,4 @@
-{ config, lib, pkgs, inputs, ... }:
-let
-  system = "x86_64-linux";
-in
+{ lib, pkgs, ... }:
 {
 
   services.displayManager.sddm.enable = true;
