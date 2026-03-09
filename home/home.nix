@@ -60,6 +60,7 @@ in
     llvmPackages_20.clang-tools
     kdePackages.qtstyleplugin-kvantum
     catppuccin-gtk
+    fastfetch
   ];
 
   services.xembed-sni-proxy.enable = true;

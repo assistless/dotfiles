@@ -3,7 +3,7 @@ import QtQuick
 import Quickshell.Wayland
 import QtQuick.Effects
 import Quickshell.Io
-import "../../assets"
+
 import "../core"
 PanelWindow {
     id: wallpaperPanel

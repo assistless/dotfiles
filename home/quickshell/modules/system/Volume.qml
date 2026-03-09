@@ -4,7 +4,7 @@ import Quickshell
 import Quickshell.Services.Pipewire
 import Quickshell.Widgets
 import Quickshell.Wayland
-import "../../assets"
+import "../core"
 Scope {
     id: root
 

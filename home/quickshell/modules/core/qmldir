@@ -1,3 +1,5 @@
 module modules.core
 singleton Config 1.0 Config.qml
 singleton SystemService 1.0 SystemService.qml
+singleton Theme 1.0 Theme.qml
+singleton AppUsage 1.0 AppUsage.qml

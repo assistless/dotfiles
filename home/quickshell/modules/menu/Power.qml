@@ -2,7 +2,7 @@
 import QtQuick
 import QtQuick.Layouts
 import "../core"
-import "../../assets"
+
 RowLayout {
     id: powerButtons
     spacing: 5

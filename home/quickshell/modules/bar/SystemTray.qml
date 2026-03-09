@@ -3,7 +3,7 @@ import QtQuick.Controls
 import Quickshell
 import Quickshell.Services.SystemTray
 import Quickshell.Widgets
-import "../../assets"
+
 import "../core"
 Rectangle {
     anchors.margins: 0

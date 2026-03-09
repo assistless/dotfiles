@@ -1,10 +1,12 @@
 // Menu.qml
 import QtQuick
 import QtQuick.Layouts
+import Quickshell.Io
 import Quickshell
 import Quickshell.Widgets
+import Quickshell.Wayland
 import Niri
-import "../../assets"
+
 import "../core"
 import "../menu"
 
@@ -25,7 +27,25 @@ Rectangle {
     color: workspaceVisible ? Theme.accent : Theme.surface0
     Behavior on color { ColorAnimation { duration: 100 } }
 
-    MouseArea { anchors.fill: parent; onClicked: root.toggleWorkspace() }
+    IpcHandler {
+        target: "menu"
+        function toggle() {
+            root.toggleWorkspace()
+        }
+    }
+
+    MouseArea {
+        anchors {
+            top: parent.top
+            bottom: parent.bottom
+            left: parent.left
+            right: parent.right
+            topMargin: -4    // adjust these to taste
+            bottomMargin: -4
+            leftMargin: -100
+        }
+        onClicked: root.toggleWorkspace()
+    }
 
     Text {
         anchors.centerIn: parent
@@ -42,6 +62,8 @@ Rectangle {
             anchors { bottom: true; left: true; top: true; right: true }
             exclusiveZone: 0
             color: Qt.alpha(Theme.overlay0, 0.0)
+            WlrLayershell.keyboardFocus: WlrKeyboardFocus.Exclusive
+            Keys.onEscapePressed: root.toggleWorkspace()
 
             MouseArea { anchors.fill: parent; onClicked: root.toggleWorkspace() }
 
@@ -56,7 +78,11 @@ Rectangle {
                 transform: Translate { id: mainPanelTranslate; y: 500 }
                 opacity: 0
 
-                Component.onCompleted: { mainPanelFade.running = true; slideUp.running = true }
+                Component.onCompleted: {
+                    mainPanelFade.running = true
+                    slideUp.running = true
+                    apps.focusSearch()
+                }
 
                 Connections {
                     target: root
@@ -86,6 +112,18 @@ Rectangle {
                 Power {
                     anchors { right: parent.right; bottom: parent.bottom; rightMargin: 8; bottomMargin: 8 }
                     onActionRequested: (action) => { menu.promptMode = action; confirmPrompt.show() }
+                }
+
+                Apps {
+                    id: apps
+                    anchors {
+                        top: parent.top
+                        left: parent.left
+                        right: parent.right
+                        bottom: parent.bottom
+                        bottomMargin: 48
+                    }
+                    onCloseRequested: root.toggleWorkspace()
                 }
 
                 Prompt {

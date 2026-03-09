@@ -3,7 +3,7 @@ import QtQuick.Layouts
 import Quickshell
 import Quickshell.Wayland
 import "../core"
-import "../../assets"
+
 PanelWindow {
     id: bar
     anchors {

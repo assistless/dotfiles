@@ -2,7 +2,7 @@
 import QtQuick
 import Quickshell
 import "../core"
-import "../../assets"
+
 PanelWindow {
     id: promptWindow
     required property string promptMode

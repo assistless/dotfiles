@@ -4,7 +4,7 @@ import Quickshell
 import Niri
 import Quickshell.Widgets
 import Quickshell.Wayland
-import "../../assets"
+
 import "../core"
 Row {
     spacing: 5

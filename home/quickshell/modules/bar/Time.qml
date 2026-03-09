@@ -2,7 +2,7 @@ import QtQuick
 import QtQuick.Layouts
 import Quickshell
 import QtQuick.Controls
-import "../../assets"
+import "../core"
 Rectangle {
     id: root
 

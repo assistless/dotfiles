@@ -4,7 +4,7 @@ import QtQuick.Controls
 import Quickshell
 import Niri
 import "../core"
-import "../../assets"
+
 
 Rectangle {
     id: workspacesPanel

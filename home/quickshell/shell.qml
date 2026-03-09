@@ -15,6 +15,7 @@ ShellRoot{
     LazyLoader{ active: true; component: Quote{} }
     LazyLoader{ active: true; component: Volume{} }
     LazyLoader{ active: true; component: Notifications{} }
+    LazyLoader{ active: true; component: Launcher{} }
     Item {
         Niri {
             id: niri
@@ -27,5 +28,8 @@ ShellRoot{
             }
         }
     }
+    PersistentProperties {
+        id: appUsageStorage
+        property string usageJson: "{}"
+    }
 }
-

@@ -2,7 +2,7 @@ import QtQuick
 import QtQuick.Layouts
 import Quickshell
 import Quickshell.Services.UPower
-import "../../assets"
+import "../core"
 Rectangle {
     property int run: 0
     width: powerDisplay.contentWidth
