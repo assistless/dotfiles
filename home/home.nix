@@ -61,6 +61,7 @@ in
     kdePackages.qtstyleplugin-kvantum
     catppuccin-gtk
     fastfetch
+    gnome-disk-utility
   ];
 
   services.xembed-sni-proxy.enable = true;
