@@ -118,14 +118,16 @@ in
 
   catppuccin = {
     enable = true;
-    flavor = "latte";
+    # flavor = "latte";
+    flavor = "mocha";
     accent = "green";
   };
 
 
   dconf.settings = {
     "org/gnome/desktop/interface" = {
-      color-scheme = "prefer-light";
+      # color-scheme = "prefer-light";
+      color-scheme = "prefere-dark";
       gtk-theme = "catppuccin-latte-green-standard+default";
     };
   };

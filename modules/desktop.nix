@@ -58,7 +58,8 @@
 
   catppuccin = {
     enable = true;
-    flavor = "latte";
+    # flavor = "latte";
+    flavor = "mocha";
     accent = "green";
   };
 
