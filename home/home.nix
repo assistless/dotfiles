@@ -59,9 +59,9 @@ in
     spotdl
     llvmPackages_20.clang-tools
     kdePackages.qtstyleplugin-kvantum
-    catppuccin-gtk
     fastfetch
     gnome-disk-utility
+    uv
   ];
 
   services.xembed-sni-proxy.enable = true;
@@ -121,15 +121,7 @@ in
     # flavor = "latte";
     flavor = "mocha";
     accent = "green";
-  };
-
-
-  dconf.settings = {
-    "org/gnome/desktop/interface" = {
-      # color-scheme = "prefer-light";
-      color-scheme = "prefere-dark";
-      gtk-theme = "catppuccin-latte-green-standard+default";
-    };
+    kvantum.enable = true;
   };
 
   nixpkgs.config.allowUnfree = true;
