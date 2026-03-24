@@ -8,7 +8,7 @@
   ];
 
   networking.hostName = "nixos";
-
+  networking.firewall.enable = false;
   # EFI boot
   boot.loader.systemd-boot = {
     enable = true;

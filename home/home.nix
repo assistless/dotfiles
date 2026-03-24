@@ -35,9 +35,9 @@ in
     nodejs
     kdePackages.qtdeclarative
     pnpm
-    nautilus
+    thunar
     antimicrox
-    vscodium-fhs
+    vscode-fhs
     godot
     blender
     xwayland-satellite
@@ -58,7 +58,7 @@ in
     brightnessctl
     spotdl
     llvmPackages_20.clang-tools
-    kdePackages.qtstyleplugin-kvantum
+    yt-dlp
     fastfetch
     gnome-disk-utility
     uv
