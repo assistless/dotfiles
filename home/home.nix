@@ -62,13 +62,6 @@ in
     fastfetch
     gnome-disk-utility
     uv
-    kdePackages.qt6ct
-    kdePackages.breeze
-    catppuccin-gtk
-    catppuccin
-    linux-wifi-hotspot
-    haveged
-    protonvpn-gui
   ];
 
   services.xembed-sni-proxy.enable = true;
@@ -123,6 +116,13 @@ in
     package = inputs.qml-niri.packages.${system}.quickshell;
   };
 
+  catppuccin = {
+    enable = true;
+    # flavor = "latte";
+    flavor = "mocha";
+    accent = "green";
+    kvantum.enable = true;
+  };
 
   nixpkgs.config.allowUnfree = true;
 
@@ -130,18 +130,12 @@ in
     enable = true;
     createDirectories = true;
   };
-  catppuccin = { 
-    gtk.icon.enable = true;
-    gtk.icon.flavor = "latte";
-    cursors.enable = true;
-    cursors.accent = "green";
-    accent = "green";
-  };
   gtk.enable = true;
   qt = {
-    enable = true;
-    platformTheme.name = "qt6ct";
-  };
+  enable = true;
+  platformTheme.name = "kvantum";
+  style.name = "kvantum";
+};
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
   home.file = {
