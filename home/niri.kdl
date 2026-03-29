@@ -289,7 +289,7 @@ window-rule {
     open-floating true
 }
 window-rule {
-    match app-id=r#"^thunar$"# title="Rename|Move|Copy|Delete|Properties$"
+    match app-id=r#"^thunar$"# title="Rename|Moving|Copying|Delete|Properties$"
     open-floating true
 }
 // Example: block out two password managers from screen capture.
@@ -309,7 +309,6 @@ window-rule {
 window-rule {
     geometry-corner-radius 8
     clip-to-geometry true
-    open-floating true
 }
 
 binds {
