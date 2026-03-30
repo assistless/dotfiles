@@ -133,8 +133,8 @@ in
   gtk.enable = true;
   qt = {
   enable = true;
-  platformTheme.name = "kvantum";
-  style.name = "kvantum";
+  platformTheme.name = "qt6ct";
+  style.name = "qt6ct";
 };
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
