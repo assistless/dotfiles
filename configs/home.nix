@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, inputs, lib, self, ... }:
 let
   spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.stdenv.system};
   system = "x86_64-linux";
@@ -68,7 +68,7 @@ in
   services.blueman-applet.enable = true;
   services.polkit-gnome.enable = true;
   services.playerctld.enable = true;
-  programs.bottom.enable = true;
+  programs.btop.enable = true;
   programs.spicetify = {
     enable = true;
     enabledExtensions = with spicePkgs.extensions; [
@@ -78,7 +78,21 @@ in
     ];
   };
 
-  wayland.windowManager.hyprland.systemd.enable = true;
+  systemd.user.services.quickshell = {
+    Unit = {
+      Description = "Quickshell";
+      After = [ "graphical-session.target" ];
+      PartOf = [ "graphical-session.target" ];
+    };
+    Service = {
+      ExecStart = "${inputs.qml-niri.packages.${system}.quickshell}/bin/qs";
+      Restart = "on-failure";
+    };
+    Install = {
+      WantedBy = [ "graphical-session.target" ];
+    };
+  };
+
   programs.kitty = {
     enable = true;
     shellIntegration.enableFishIntegration = true;
@@ -92,7 +106,6 @@ in
       extensions.force = true;
     };
   };
-  services.hyprpolkitagent.enable = true;
   programs.wlogout.enable = true;
   programs.fish = {
     enable = true;
@@ -118,10 +131,14 @@ in
 
   catppuccin = {
     enable = true;
-    # flavor = "latte";
     flavor = "mocha";
     accent = "green";
-    kvantum.enable = true;
+    kvantum.enable = false;
+    cursors.enable = true;
+    gtk.icon = {
+      enable = true;
+      flavor = "latte";
+    };
   };
 
   nixpkgs.config.allowUnfree = true;
@@ -132,18 +149,26 @@ in
   };
   gtk.enable = true;
   qt = {
-  enable = true;
-  platformTheme.name = "qt6ct";
-  style.name = "qt6ct";
-};
+    enable = true;
+    platformTheme.name = "kde";
+    style = {
+      name = "breeze";
+      package = pkgs.kdePackages.breeze;
+    };
+  };
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
   home.file = {
-    ".config/niri/config.kdl".source = config.lib.file.mkOutOfStoreSymlink "/home/demi/dotfiles/home/niri.kdl";
-    ".config/quickshell".source = config.lib.file.mkOutOfStoreSymlink "/home/demi/dotfiles/home/quickshell";
+    ".config/niri/config.kdl".source = config.lib.file.mkOutOfStoreSymlink "${self}/configs/niri/config.kdl";
+    ".config/quickshell".source = config.lib.file.mkOutOfStoreSymlink "${self}/configs/quickshell";
   };
   
-  systemd.user.sessionVariables = config.home.sessionVariables;
+  systemd.user.sessionVariables = lib.mkForce {
+    EDITOR = "kate";
+    TZ = "Asia/Ho_Chi_Minh";
+    QML2_IMPORT_PATH = "/home/demi/.nix-profile/lib/qt-5.15.18/qml:/home/demi/.nix-profile/lib/qt-6/qml:/run/current-system/sw/lib/qt-5.15.18/qml:/run/current-system/sw/lib/qt-6/qml";
+    QML_IMPORT_PATH = "/home/demi/.nix-profile/lib/qt-5.15.18/qml:/home/demi/.nix-profile/lib/qt-6/qml:/run/current-system/sw/lib/qt-5.15.18/qml:/run/current-system/sw/lib/qt-6/qml";
+  };
 
   # Home Manager can also manage your environment variables through
   # 'home.sessionVariables'. These will be explicitly sourced when using a

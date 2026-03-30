@@ -32,7 +32,7 @@
         {
           home-manager.extraSpecialArgs = { inherit inputs; self = inputs.self; };
           home-manager.sharedModules = [ catppuccin.homeModules.catppuccin ];
-          home-manager.users.demi = ./home/home.nix;
+          home-manager.users.demi = ./configs/home.nix;
         }
       ];
     };
@@ -45,7 +45,7 @@
 	{
 	  home-manager.extraSpecialArgs = { inherit inputs; self = inputs.self; };
 	  home-manager.sharedModules = [ catppuccin.homeModules.catppuccin ];
-	  home-manager.users.demi = ./home/home.nix;
+	  home-manager.users.demi = ./configs/home.nix;
 	}
       ];
     };

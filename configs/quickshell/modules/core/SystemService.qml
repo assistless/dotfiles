@@ -10,5 +10,5 @@ Singleton {
     function restart()  { Quickshell.execDetached({command: ["systemctl", "reboot"]})}
     function suspend()  { Quickshell.execDetached({command: ["systemctl", "suspend"]})}
     function lock()     { Quickshell.execDetached({command: ["loginctl", "lock-session"]})}
-    function logout()   { Quickshell.execDetached({command: ["niri", "msg", "action", "quit",]})}
+    function logout()   { Quickshell.execDetached({command: ["systemctl", "--user", "stop", "graphical-session.target"]})}
 }

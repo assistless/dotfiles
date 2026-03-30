@@ -16,7 +16,7 @@ Multi-machine NixOS configuration using flakes.
 ├── flake.lock                # Locked inputs
 ├── stylix.nix                # Stylix theming
 ├── wallpaper.png             # Desktop wallpaper
-├── computors/
+├── systems/
 │   ├── 1/                    # Dell configuration
 │   │   ├── configuration.nix
 │   │   └── hardware-configuration.nix
@@ -27,22 +27,24 @@ Multi-machine NixOS configuration using flakes.
 │   ├── shared.nix            # Common settings
 │   ├── desktop.nix           # Desktop environment
 │   └── gaming.nix            # Gaming packages
-└── home/
+└── configs/
     ├── home.nix              # Home Manager config
-    ├── niri.kdl              # Niri window manager config
+    └── niri/
+    │   └── config.kdl        # Niri window manager config
     └── quickshell/           # Quickshell configs (auto-synced)
 ```
 
 ## Building
 
-On the Dell machine:
+On sys1 machine:
 ```bash
-sudo nixos-rebuild switch --flake .#dell
+sudo nixos-rebuild switch --flake .#sys1
 ```
 
-On the Lenovo machine:
+On sys2 machine:
 ```bash
-sudo nixos-rebuild switch --flake .#lenovo
+sudo nixos-rebuild switch --flake .#sys2
+```
 ```
 
 Or use the helper script:
