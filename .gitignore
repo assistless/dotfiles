@@ -3,4 +3,4 @@ result
 *.swo
 *~
 .DS_Store
-configs/quickshell/app_usage.json
+configs/quickshell/data/app_usage.json
