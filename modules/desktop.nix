@@ -2,10 +2,6 @@
 {
 
   services.displayManager.sddm.enable = true;
-  services.desktopManager.plasma6.enable = true;
-  environment.plasma6.excludePackages = with pkgs.kdePackages; [
-    plasma-browser-integration
-  ];
   services.xserver.enable = true;
   programs.appimage = {
     enable = true;
@@ -55,7 +51,7 @@
         lcdfilter = "default";
         rgba = "none";
       };
-      defaultFonts = let font = [ "Hitmarker Text VF" ]; fontmono = ["Maple Mono NL CN"];
+      defaultFonts = let font = [ "Hitmarker Text VF" ]; fontmono = ["Maple Mono NF CN"];
         in { serif = font; sansSerif = font; monospace = fontmono; };
     };
   };

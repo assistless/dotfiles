@@ -28,7 +28,6 @@ in
     nwg-look
     kdePackages.kate
     mpv
-    ripgrep
     fd
     unzip
     python3
@@ -62,11 +61,14 @@ in
     fastfetch
     gnome-disk-utility
     uv
+    kdePackages.systemsettings
+    kdePackages.plasma-integration
+    kdePackages.qqc2-breeze-style
+    kdePackages.qtmultimedia
   ];
 
   services.xembed-sni-proxy.enable = true;
   services.blueman-applet.enable = true;
-  services.polkit-gnome.enable = true;
   services.playerctld.enable = true;
   programs.btop.enable = true;
   programs.spicetify = {
@@ -78,27 +80,12 @@ in
     ];
   };
 
-  systemd.user.services.quickshell = {
-    Unit = {
-      Description = "Quickshell";
-      After = [ "graphical-session.target" ];
-      PartOf = [ "graphical-session.target" ];
-    };
-    Service = {
-      ExecStart = "${inputs.qml-niri.packages.${system}.quickshell}/bin/qs";
-      Restart = "on-failure";
-    };
-    Install = {
-      WantedBy = [ "graphical-session.target" ];
-    };
-  };
 
   programs.kitty = {
     enable = true;
     shellIntegration.enableFishIntegration = true;
     extraConfig = "shell fish";
   };
-  programs.fuzzel.enable = true;
   programs.firefox = {
     enable = true;
     profiles.default = {
@@ -159,16 +146,11 @@ in
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
   home.file = {
-    ".config/niri/config.kdl".source = config.lib.file.mkOutOfStoreSymlink "${self}/configs/niri/config.kdl";
-    ".config/quickshell".source = config.lib.file.mkOutOfStoreSymlink "${self}/configs/quickshell";
+    ".config/niri/config.kdl".source = config.lib.file.mkOutOfStoreSymlink "/home/demi/dotfiles/configs/niri/config.kdl";
+    ".config/quickshell".source = config.lib.file.mkOutOfStoreSymlink "/home/demi/dotfiles/configs/quickshell";
   };
   
-  systemd.user.sessionVariables = lib.mkForce {
-    EDITOR = "kate";
-    TZ = "Asia/Ho_Chi_Minh";
-    QML2_IMPORT_PATH = "/home/demi/.nix-profile/lib/qt-5.15.18/qml:/home/demi/.nix-profile/lib/qt-6/qml:/run/current-system/sw/lib/qt-5.15.18/qml:/run/current-system/sw/lib/qt-6/qml";
-    QML_IMPORT_PATH = "/home/demi/.nix-profile/lib/qt-5.15.18/qml:/home/demi/.nix-profile/lib/qt-6/qml:/run/current-system/sw/lib/qt-5.15.18/qml:/run/current-system/sw/lib/qt-6/qml";
-  };
+  systemd.user.sessionVariables = config.home.sessionVariables;
 
   # Home Manager can also manage your environment variables through
   # 'home.sessionVariables'. These will be explicitly sourced when using a

@@ -1,89 +1,16 @@
-> The folloing is written by Claude. I am too lazy to write my own for now.
+# NixOS Dotfiles
 
-# NixOS Configuration
-
-Multi-machine NixOS configuration using flakes.
+Multi-machine NixOS/home-manager config using flakes.
 
 ## Machines
-
-- **dell**: Main machine (EFI + Btrfs + Windows dual boot)
-- **lenovo**: Secondary machine (BIOS + ext4 + 16GB swap)
+- **sys1**: EFI/Btrfs
+- **sys2**: BIOS
 
 ## Structure
 ```
 .
-├── flake.nix                 # Main flake configuration
-├── flake.lock                # Locked inputs
-├── stylix.nix                # Stylix theming
-├── wallpaper.png             # Desktop wallpaper
-├── systems/
-│   ├── 1/                    # Dell configuration
-│   │   ├── configuration.nix
-│   │   └── hardware-configuration.nix
-│   └── 2/                    # Lenovo configuration
-│       ├── configuration.nix
-│       └── hardware-configuration.nix
-├── modules/
-│   ├── shared.nix            # Common settings
-│   ├── desktop.nix           # Desktop environment
-│   └── gaming.nix            # Gaming packages
-└── configs/
-    ├── home.nix              # Home Manager config
-    └── niri/
-    │   └── config.kdl        # Niri window manager config
-    └── quickshell/           # Quickshell configs (auto-synced)
-```
-
-## Building
-
-On sys1 machine:
-```bash
-sudo nixos-rebuild switch --flake .#sys1
-```
-
-On sys2 machine:
-```bash
-sudo nixos-rebuild switch --flake .#sys2
-```
-```
-
-Or use the helper script:
-```bash
-./rebuild.sh
-```
-
-## Quickshell Config
-
-Quickshell configurations are stored in `home/quickshell/` and automatically synced to `~/.config/quickshell` on both machines.
-
-To update quickshell configs:
-1. Edit files in `home/quickshell/`
-2. Commit changes to git
-3. Pull on other machine
-4. Run `./rebuild.sh`
-
-## Initial Setup on New Machine
-```bash
-git clone <your-repo-url> ~/dotfiles
-cd ~/dotfiles
-./rebuild.sh
-```
-
-## Updating
-```bash
-cd ~/dotfiles
-nix flake update  # Update all inputs
-./rebuild.sh
-```
-```
-
-## 4. Add .gitignore
-
-Create `.gitignore`:
-```
-result
-*.swp
-*.swo
-*~
-.DS_Store
-```
+├── flake.nix
+├── configs/
+│   ├── home.nix
+│   └── niri/
+│   │   └──

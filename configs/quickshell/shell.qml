@@ -5,17 +5,18 @@ import QtQuick.Layouts
 import Quickshell
 import Quickshell.Wayland
 import Niri
-import "./modules/bar/"
-import "./modules/system/"
-import "./modules/core/"
+import "./bar/"
+import "./system/"
+import "./core/"
 
 ShellRoot{
     id: root
-    LazyLoader{ active: true; component: Bar{} }
-    LazyLoader{ active: true; component: Quote{} }
-    LazyLoader{ active: true; component: Volume{} }
-    LazyLoader{ active: true; component: Notifications{} }
-    LazyLoader{ active: true; component: Launcher{} }
+    Bar{}
+    Wallpaper{}
+    Volume{}
+    Notifications{}
+    Launcher{}
+    Runner{}
     Item {
         Niri {
             id: niri

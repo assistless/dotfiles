@@ -8,12 +8,12 @@
   boot.kernelModules = [ "uinput" ];
   boot.plymouth.enable = true;
   boot.kernelPackages = pkgs.linuxPackages_zen.extend (kself: ksuper: {
-  kernel = ksuper.kernel.override {
-    structuredExtraConfig = {
-      NTSYNC = true; # Enables NTSYNC
+    kernel = ksuper.kernel.override {
+      structuredExtraConfig = {
+        NTSYNC = true; # Enables NTSYNC
+      };
     };
-  };
-});
+  });
   boot.kernel.sysctl = {
     "vm.swappiness" = 30;
   };
@@ -23,7 +23,7 @@
   services.blueman.enable = true;
   services.upower.enable = true;
   services.libinput.enable = true;
-
+  boot.blacklistedKernelModules = [ "kvm" "kvm_intel" "kvm_amd" ];
   services.udev.extraRules = ''
     KERNEL=="uinput", MODE="0660", GROUP="uinput", OPTIONS+="static_node=uinput"
   '';
@@ -34,17 +34,14 @@
     font = "Lat2-Terminus16";
     keyMap = "us";
   };
-  virtualisation.libvirtd = {
-    enable = true;
-    qemu = {
-      package = pkgs.qemu_kvm;
-      swtpm.enable = true;
-    };
-  };
 
-  users.users.demi = {
+  virtualisation.virtualbox.host.enable = true;
+  users.extraGroups.vboxusers.members = [ "demi" ];
+  virtualisation.virtualbox.host.enableExtensionPack = true;
+
+  users.users.demi = {  
     isNormalUser = true;
-    extraGroups = [ "wheel" "uinput" "libvirtd" ];
+    extraGroups = [ "wheel" "uinput" ];
   };
 
   services.openssh.enable = true;
