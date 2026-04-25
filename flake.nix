@@ -23,7 +23,7 @@
   };
 
   outputs = {nixpkgs, home-manager, catppuccin, niri, ...} @ inputs: {
-    nixosConfigurations.sys1 = nixpkgs.lib.nixosSystem {
+    nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
       specialArgs = { inherit inputs; };
       modules = [
         catppuccin.nixosModules.catppuccin
@@ -34,19 +34,6 @@
           home-manager.sharedModules = [ catppuccin.homeModules.catppuccin ];
           home-manager.users.demi = ./configs/home.nix;
         }
-      ];
-    };
-    nixosConfigurations.sys2 = nixpkgs.lib.nixosSystem {
-      specialArgs = { inherit inputs; };
-      modules = [
-	catppuccin.nixosModules.catppuccin
-	./systems/2/configuration.nix
-	home-manager.nixosModules.home-manager
-	{
-	  home-manager.extraSpecialArgs = { inherit inputs; self = inputs.self; };
-	  home-manager.sharedModules = [ catppuccin.homeModules.catppuccin ];
-	  home-manager.users.demi = ./configs/home.nix;
-	}
       ];
     };
   };

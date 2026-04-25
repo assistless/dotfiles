@@ -56,13 +56,6 @@
     };
   };
 
-  catppuccin = {
-    enable = true;
-    # flavor = "latte";
-    flavor = "mocha";
-    accent = "green";
-  };
-
   programs.niri = {
     enable = true;
   };
