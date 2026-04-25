@@ -20,6 +20,7 @@ ColumnLayout {
         if (enableSearch && searchField.visible) {
             searchField.forceActiveFocus()
             searchField.text = ""
+            appList.positionViewAtBeginning()
         }
         selectedIndex = 0
         hoverReady = false

@@ -320,8 +320,8 @@ binds {
     //
     // Most actions that you can bind here can also be invoked programmatically with
     // `niri msg action do-something`.
-    Mod+R hotkey-overlay-title="Open Run Dialog" { spawn "qs" "ipc" "call" "runner" "toggle";}
-    Mod+E hotkey-overlay-title="Open File Manager" { spawn "thunar";}
+    Mod+R hotkey-overlay-title="Open Run Dialog" { spawn "wmenu";}
+    Mod+E hotkey-overlay-title="Open File Manager" { spawn "kitty" "-e" "yazi";}
     Mod+D hotkey-overlay-title="Open Application Menu" { spawn "qs" "ipc" "call" "menu" "toggle";}
     // Mod-Shift-/, which is usually the same as Mod-?,
     // shows a list of important hotkeys.

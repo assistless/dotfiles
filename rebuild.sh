@@ -1,5 +1,35 @@
 #!/bin/bash
-echo "Input flake name: "
-read flake
 
-sudo nixos-rebuild switch --flake ~/dotfiles/#$flake
+while true; do
+    read -p "Input flake: " flake
+
+    sudo nixos-rebuild switch --flake ~/dotfiles#"$flake"
+    exit_code=$?
+
+    if [ $exit_code -eq 0 ]; then
+        while true; do
+            read -p "Clean up? (y/n): " answer
+
+            case "$answer" in
+                y|Y|yes|YES|Yes)
+                    echo "Cleaning up..."
+                    sudo nix-collect-garbage -d
+                    nix-collect-garbage -d
+                    sudo nix store optimise
+                    nix store optimise
+                    echo "Done!"
+                    exit 0
+                    ;;
+                n|N|no|NO|No)
+                    echo "Exiting..."
+                    exit 0
+                    ;;
+                *)
+                    ;;
+            esac
+        done
+    else
+        echo "Rebuild failed. Either its a syntax error, spelling error or it spontaneously exploded."
+        break
+    fi
+done

@@ -17,6 +17,14 @@
   boot.kernel.sysctl = {
     "vm.swappiness" = 30;
   };
+  
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 7d";
+  };
+
+  nix.settings.auto-optimise-store = true;
 
   hardware.uinput.enable = true;
   hardware.bluetooth.enable = true;

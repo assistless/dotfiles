@@ -27,15 +27,11 @@ in
     kdePackages.ark
     nwg-look
     kdePackages.kate
-    mpv
-    fd
     unzip
     python3
     nodejs
     kdePackages.qtdeclarative
     pnpm
-    thunar
-    antimicrox
     vscode-fhs
     godot
     blender
@@ -43,14 +39,8 @@ in
     inputs.awww.packages.${system}.awww
     chromium
     kdePackages.konsole
-    gnome-software
     nil
-    virt-manager
-    virt-viewer
     _86Box
-    dosbox-staging
-    quickemu
-    looking-glass-client
     javaPackages.compiler.temurin-bin.jre-21
     pavucontrol
     android-file-transfer
@@ -62,11 +52,26 @@ in
     gnome-disk-utility
     uv
     kdePackages.systemsettings
-    kdePackages.plasma-integration
+    kdePackages.plasma-workspace
+    kdePackages.knewstuff
     kdePackages.qqc2-breeze-style
     kdePackages.qtmultimedia
+    python314Packages.tkinter
+    tor-browser
+    unrar
+    ffmpeg
+    wmenu
+    adw-gtk3
   ];
-
+  programs.yazi = {
+    enable = true;
+    enableFishIntegration = true;
+  };
+  programs.kitty.enable = true;
+  programs.mpv.enable = true;
+  services.copyq.enable = true;
+  programs.nushell.enable = true;
+  services.polkit-gnome.enable = true;
   services.xembed-sni-proxy.enable = true;
   services.blueman-applet.enable = true;
   services.playerctld.enable = true;
@@ -80,12 +85,6 @@ in
     ];
   };
 
-
-  programs.kitty = {
-    enable = true;
-    shellIntegration.enableFishIntegration = true;
-    extraConfig = "shell fish";
-  };
   programs.firefox = {
     enable = true;
     profiles.default = {
@@ -103,11 +102,14 @@ in
       fish_prompt = ''
         # Show nix-shell indicator
         if set -q IN_NIX_SHELL
-          echo -n (set_color blue)"[nix-shell] "(set_color normal)
+          echo -n (set_color green)"[nix-shell] "(set_color normal)
         end
-      
         # Your regular prompt
-        echo -n (set_color cyan)(prompt_pwd)(set_color normal)' > '
+        echo -e -s (set_color yellow)$hostname(set_color green)@(set_color blue)(prompt_pwd --dir-length 0) 
+	echo -e -n -s (set_color magenta)$USER(set_color magenta)'>'
+      '';
+      fish_right_prompt = ''
+	echo -n -s (set_color red)"[$status]"
       '';
     };
    };
@@ -116,17 +118,6 @@ in
     package = inputs.qml-niri.packages.${system}.quickshell;
   };
 
-  catppuccin = {
-    enable = true;
-    flavor = "mocha";
-    accent = "green";
-    kvantum.enable = false;
-    cursors.enable = true;
-    gtk.icon = {
-      enable = true;
-      flavor = "latte";
-    };
-  };
 
   nixpkgs.config.allowUnfree = true;
 
