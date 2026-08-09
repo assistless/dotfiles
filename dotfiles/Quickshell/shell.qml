@@ -8,4 +8,5 @@ Scope {
     PolkitAgent {}
     VolumeOSD {}
     Notifications {}
+    Launcher {}
 }

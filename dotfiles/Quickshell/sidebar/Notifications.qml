@@ -38,7 +38,7 @@ Scope {
   PanelWindow {
     visible: root.centerOpen
     anchors { top: true; right: true; bottom: true }
-    margins { top: 12; right: 12; bottom: 12 }
+    // margins { top: 12; right: 12; bottom: 12 }
 
     implicitWidth: 380
     color: "transparent"
@@ -47,8 +47,6 @@ Scope {
     Rectangle {
       anchors.fill: parent
       color: "white"
-      border.width: 2
-      border.color: "black"
     }
 
     ColumnLayout {
