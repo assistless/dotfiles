@@ -2,7 +2,9 @@
 {
   programs.git = {
     enable = true;
-    userName = "demi@ultimatium";
-    userEmail = "assistless@proton.me";
+    settings = {
+      user.name = "demi@ultimatum";
+      user.email = "assistless@proton.me";
+    };
   };
 }
