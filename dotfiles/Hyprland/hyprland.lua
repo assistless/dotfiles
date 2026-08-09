@@ -20,7 +20,7 @@ hl.monitor({
 ---------------------
 local terminal    = "kitty"
 local fileManager = "thunar"
-local menu        = "hyprlauncher"
+local menu        = "qs ipc call launcher toggle"
 
 
 -------------------
