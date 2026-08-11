@@ -5,34 +5,7 @@
 { config, lib, pkgs, ... }:
 
 {
-  services.greetd = {
-    enable = true;
-    settings = {
-      default_session = {
-        command = "${pkgs.sway}/bin/sway --config /etc/greetd/sway-config";
-        user = "greeter";
-      };
-    };
-  };
-  # xdg desktop portal
-  xdg.portal = {
-    enable = true;
-    extraPortals = [
-      pkgs.kdePackages.xdg-desktop-portal-kde
-      pkgs.xdg-desktop-portal-gtk
-    ];
-    config.common.default = "*";
-  };
 
-  # bluetooth
-  hardware.bluetooth = {
-    enable = true;
-    settings = {
-      General = {
-        Experimental = true;
-      };
-    };
-  };
   # swap
   swapDevices = [{
     device = "/swap/swapfile";

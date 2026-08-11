@@ -64,7 +64,7 @@ Scope {
 
                     IconImage {
                         implicitSize: 30
-                        source: Quickshell.iconPath("audio-volume-high-symbolic")
+                        source: Quickshell.iconPath("org.gnome.Settings-sound-symbolic")
                     }
 
                     Rectangle {

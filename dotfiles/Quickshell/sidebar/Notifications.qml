@@ -36,106 +36,115 @@ Scope {
   }
   // notification center
   PanelWindow {
-    visible: root.centerOpen
-    anchors { top: true; right: true; bottom: true }
-    // margins { top: 12; right: 12; bottom: 12 }
-
-    implicitWidth: 380
-    color: "transparent"
+    id: centerPanel
+    anchors { top: true; bottom: true; left: true; right: true }
     exclusiveZone: 0
-
-    Rectangle {
+    WlrLayershell.layer: WlrLayer.Overlay
+    color: "transparent"
+    visible: root.centerOpen
+    MouseArea {
       anchors.fill: parent
-      color: "white"
+      onClicked: ipc.hide()
     }
 
-    ColumnLayout {
-      id: centerCol
-      anchors.fill: parent
-      anchors.margins: 10
-      spacing: 10
+    Rectangle {
+      anchors.top: parent.top
+      anchors.bottom: parent.bottom
+      anchors.right: parent.right
+      implicitWidth: 380
+      color: "white"
+      MouseArea {
+        anchors.fill: parent
+        onClicked: {}
+      }
+      ColumnLayout {
+        id: centerCol
+        anchors.fill: parent
+        anchors.margins: 10
+        spacing: 10
 
-      RowLayout {
-        Layout.fillWidth: true
-        Text {
+        RowLayout {
           Layout.fillWidth: true
-          text: "Notifications"
-          font.bold: true
-        }
-        Text {
-          text: "Clear all"
-          visible: history.count > 0
-          MouseArea {
-            anchors.fill: parent
-            onClicked: history.clear()
+          Text {
+            Layout.fillWidth: true
+            text: "Notifications"
+            font.bold: true
+          }
+          Text {
+            text: "Clear all"
+            visible: history.count > 0
+            MouseArea {
+              anchors.fill: parent
+              onClicked: history.clear()
+            }
           }
         }
-      }
 
-      ListView {
-        id: cardCol
-        Layout.fillWidth: true
-        Layout.fillHeight: true
-        clip: true
-        spacing: 8
-        model: history
-        delegate: Rectangle {
-          id: cardDelegate
-          required property string summary
-          required property string body
-          required property string appName
-          required property string time
-          required property int urgency
-          required property int index
+        ListView {
+          id: cardCol
+          Layout.fillWidth: true
+          Layout.fillHeight: true
+          clip: true
+          spacing: 8
+          model: history
+          delegate: Rectangle {
+            id: cardDelegate
+            required property string summary
+            required property string body
+            required property string appName
+            required property string time
+            required property int urgency
+            required property int index
 
-          width: ListView.view.width
-          height: cardLayout.implicitHeight + 20
-          color: "white"
-          border.width: 2
-          border.color: urgency === NotificationUrgency.Critical ? "red" : "black"
+            width: ListView.view.width
+            height: cardLayout.implicitHeight + 20
+            color: "white"
+            border.width: 2
+            border.color: urgency === NotificationUrgency.Critical ? "red" : "black"
 
-          ColumnLayout {
-            id: cardLayout
-            anchors.fill: parent
-            anchors.margins: 10
-            spacing: 4
+            ColumnLayout {
+              id: cardLayout
+              anchors.fill: parent
+              anchors.margins: 10
+              spacing: 4
 
-            RowLayout {
-              Layout.fillWidth: true
-              spacing: 5
-
-              ColumnLayout {
+              RowLayout {
                 Layout.fillWidth: true
-                spacing: 2
+                spacing: 5
 
-                Text {
+                ColumnLayout {
                   Layout.fillWidth: true
-                  text: cardDelegate.summary
-                  font.bold: true
-                  elide: Text.ElideRight
+                  spacing: 2
+
+                  Text {
+                    Layout.fillWidth: true
+                    text: cardDelegate.summary
+                    font.bold: true
+                    elide: Text.ElideRight
+                  }
+                  Text {
+                    Layout.fillWidth: true
+                    visible: text !== ""
+                    text: cardDelegate.body
+                    wrapMode: Text.WordWrap
+                  }
+                  Text {
+                    visible: cardDelegate.appName !== ""
+                    text: cardDelegate.appName
+                    color: "grey"
+                  }
                 }
                 Text {
-                  Layout.fillWidth: true
-                  visible: text !== ""
-                  text: cardDelegate.body
-                  wrapMode: Text.WordWrap
+                  text: cardDelegate.time
+                  Layout.alignment: Qt.AlignTop
                 }
                 Text {
-                  visible: cardDelegate.appName !== ""
-                  text: cardDelegate.appName
-                  color: "grey"
-                }
-              }
-              Text {
-                text: cardDelegate.time
-                Layout.alignment: Qt.AlignTop
-              }
-              Text {
-                text: "x"
-                Layout.alignment: Qt.AlignTop
-                MouseArea {
-                  anchors.fill: parent
-                  onClicked: history.remove(cardDelegate.index)
+                  text: "x"
+                  Layout.alignment: Qt.AlignTop
+                  MouseArea {
+                    anchors.fill: parent
+                    onClicked: history.remove(cardDelegate.index)
+                  }
                 }
               }
             }
@@ -144,7 +153,6 @@ Scope {
       }
     }
   }
-
   // single notification
   PanelWindow {
     anchors { top: true; right: true }
