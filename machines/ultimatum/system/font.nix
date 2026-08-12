@@ -30,9 +30,9 @@ in
         rgba = "rgb";
       };
       defaultFonts = {
-        serif = "Hitmarker Text VF";
-        sansSerif = "Hitmarker Text VF";
-        monospace = "Fira Code";
+        serif = [ "Hitmarker Text VF" ];
+        sansSerif = [ "Hitmarker Text VF" ];
+        monospace = [ "Fira Code" ];
       };
     };
   };

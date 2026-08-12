@@ -13,5 +13,6 @@
     wl-clipboard
     satty
     libnotify
+    vscodium-fhs
   ]; 
 }

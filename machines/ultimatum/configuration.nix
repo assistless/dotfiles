@@ -66,6 +66,7 @@
     quickshell
     sway
     git
+    kdePackages.ark
   ];
 
   # misc
@@ -79,8 +80,8 @@
   services.openssh.enable = true;
 
   # firewall
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
+  networking.firewall.allowedTCPPorts = [ 25565 19132 ];
+  networking.firewall.allowedUDPPorts = [ 25565 19132 ];
   networking.firewall.enable = false;
 
   system.stateVersion = "26.05"; # dont change
