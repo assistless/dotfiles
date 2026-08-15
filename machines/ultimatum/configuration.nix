@@ -61,14 +61,6 @@
     # packages = with pkgs; [];
   };
 
-  # packages
-  environment.systemPackages = with pkgs; [
-    quickshell
-    sway
-    git
-    kdePackages.ark
-  ];
-
   # misc
   programs.mtr.enable = true;
   programs.gnupg.agent = {

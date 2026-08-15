@@ -25,7 +25,9 @@ Row {
                 menu: iconImage.modelData ? iconImage.modelData.menu : null
             }
 
-            ContextMenu.menu: TrayMenu { model: trayMenuOpener.children }
+            ContextMenu.menu: TrayMenu {
+                model: trayMenuOpener.children
+            }
 
             MouseArea {
                 acceptedButtons: Qt.LeftButton | Qt.MiddleButton
@@ -93,7 +95,8 @@ Row {
                                     y: menuItem.topPadding + (menuItem.availableHeight - height) / 2
 
                                     sourceComponent: {
-                                        if (!menuItem.modelData) return null;
+                                        if (!menuItem.modelData)
+                                            return null;
                                         if (menuItem.modelData.buttonType === QsMenuButtonType.CheckBox)
                                             return checkBoxComponent;
                                         else if (menuItem.modelData.buttonType === QsMenuButtonType.RadioButton)
@@ -107,12 +110,16 @@ Row {
 
                                 Component {
                                     id: checkBoxComponent
-                                    CheckBox { checkState: menuItem.modelData ? menuItem.modelData.checkState : Qt.Unchecked }
+                                    CheckBox {
+                                        checkState: menuItem.modelData ? menuItem.modelData.checkState : Qt.Unchecked
+                                    }
                                 }
 
                                 Component {
                                     id: radioButtonComponent
-                                    RadioButton { checked: menuItem.modelData ? menuItem.modelData.checkState === Qt.Checked : false }
+                                    RadioButton {
+                                        checked: menuItem.modelData ? menuItem.modelData.checkState === Qt.Checked : false
+                                    }
                                 }
                             }
                         }

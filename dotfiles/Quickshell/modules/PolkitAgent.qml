@@ -12,7 +12,9 @@ Scope {
     LazyLoader {
         active: polkitAgent.isActive
         PanelWindow {
-            mask: Region { item: popup }
+            mask: Region {
+                item: popup
+            }
 
             anchors {
                 top: true
@@ -32,14 +34,14 @@ Scope {
 
             // attempt authentication
             function proceedAuth() {
-                polkitAgent.flow.submit(passwordInput.text)
-                passwordInput.text = ""
-                passwordInput.forceActiveFocus()
+                polkitAgent.flow.submit(passwordInput.text);
+                passwordInput.text = "";
+                passwordInput.forceActiveFocus();
             }
             // self-explanatory
             function cancelAuth() {
-                polkitAgent.flow.cancelAuthenticationRequest()
-                passwordInput.text = ""
+                polkitAgent.flow.cancelAuthenticationRequest();
+                passwordInput.text = "";
             }
             // the prompt itself
             Rectangle {
@@ -62,7 +64,9 @@ Scope {
                     anchors.centerIn: parent
                     spacing: 12
 
-                    Item { Layout.fillHeight: true }
+                    Item {
+                        Layout.fillHeight: true
+                    }
 
                     Label {
                         Layout.fillWidth: true
@@ -94,12 +98,11 @@ Scope {
                         width: 500
                         height: 25
                         TextInput {
+                            id: passwordInput
                             anchors.verticalCenter: parent.verticalCenter
                             anchors.left: parent.left
                             anchors.leftMargin: 5
-                            id: passwordInput
-                            echoMode: polkitAgent.flow?.responseVisible
-                            ? TextInput.Normal : TextInput.Password
+                            echoMode: polkitAgent.flow?.responseVisible ? TextInput.Normal : TextInput.Password
                             selectByMouse: true
                             Layout.fillWidth: true
                             onAccepted: proceedAuth()
@@ -140,16 +143,18 @@ Scope {
                         }
                     }
 
-                    Item { Layout.fillHeight: true }
+                    Item {
+                        Layout.fillHeight: true
+                    }
                 }
             }
 
             Connections {
                 target: polkitAgent.flow
                 function onIsResponseRequiredChanged() {
-                    passwordInput.text = ""
+                    passwordInput.text = "";
                     if (polkitAgent.flow.isResponseRequired)
-                        passwordInput.forceActiveFocus()
+                        passwordInput.forceActiveFocus();
                 }
             }
         }
@@ -159,4 +164,3 @@ Scope {
         id: polkitAgent
     }
 }
-

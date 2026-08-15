@@ -55,13 +55,13 @@ hl.env("HYPRCURSOR_SIZE", "24")
 hl.config({
     general = {
         gaps_in  = 5,
-        gaps_out = 10,
+        gaps_out = 3,
 
-        border_size = 2,
+        border_size = 1,
 
         col = {
-            active_border   = { colors = {"rgba(33ccffee)", "rgba(00ff99ee)"}, angle = 45 },
-            inactive_border = "rgba(595959aa)",
+            active_border   = "rgba(107,31,173,1)",
+            inactive_border = "rgba(77,77,77,1)",
         },
         snap = {
             enabled = true,
@@ -72,11 +72,11 @@ hl.config({
         -- Please see https://wiki.hypr.land/Configuring/Advanced-and-Cool/Tearing/ before you turn this on
         allow_tearing = false,
 
-        layout = "scrolling",
+        layout = "dwindle",
     },
 
     decoration = {
-        rounding       = 5,
+        rounding       = 0,
         rounding_power = 2,
 
         -- Change transparency of focused and unfocused windows
@@ -121,15 +121,6 @@ hl.animation({ leaf = "workspaces", enabled = true, speed = 3, spring = "niri", 
 hl.animation({ leaf = "specialWorkspace", enabled = true, speed = 2, spring = "niri", style = "slidefadevert" })
 -- Ref https://wiki.hypr.land/Configuring/Basics/Workspace-Rules/
 
--- See https://wiki.hypr.land/Configuring/Layouts/Scrolling-Layout/ for more
-hl.config({
-    scrolling = {
-        fullscreen_on_one_column = true,
-        wrap_focus = false,
-        wrap_swapcol = false
-    },
-})
-
 ----------------
 ----  MISC  ----
 ----------------
@@ -154,7 +145,7 @@ hl.config({
         kb_options = "",
         kb_rules   = "",
 
-        follow_mouse = 0,
+        follow_mouse = 1,
 
         sensitivity = -0.95, -- -1.0 - 1.0, 0 means no modification.
 
@@ -185,25 +176,17 @@ hl.bind(mod .. " + M", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 
 hl.bind(mod .. " + E", hl.dsp.exec_cmd(fileManager))
 hl.bind(mod .. " + V", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mod .. " + SPACE", hl.dsp.exec_cmd(menu))
-hl.bind(mod .. ' + F', function()
-  local width = hl.get_active_window().size.x
-  if hl.get_active_workspace().tiled_layout == 'scrolling' then
-    if width >= 1300 then
-      hl.dispatch(hl.dsp.layout('colresize 0.5'))
-    else
-      hl.dispatch(hl.dsp.layout('colresize 1.0'))
-    end
-  else
-    hl.dispatch(hl.dsp.window.fullscreen({ mode = 'maximized' }))
-  end
-end) 
+hl.bind(mod .. " + F", hl.dsp.window.fullscreen({ mode = 'maximized' }))
+hl.bind(mod .. "+ SHIFT + F", hl.dsp.window.fullscreen({ mode = 'fullscreen' }))
 -- Move focus with mod + arrow keys
 hl.bind(mod .. " + left",  hl.dsp.focus({ direction = "left" }))
 hl.bind(mod .. " + right", hl.dsp.focus({ direction = "right" }))
-hl.bind(mod .. " + up",    hl.dsp.focus({ workspace = "e-1" }))
-hl.bind(mod .. " + down",  hl.dsp.focus({ workspace = "e+1" }))
-hl.bind(mod .. " + SHIFT + left", hl.dsp.layout("swapcol l"))
-hl.bind(mod .. " + SHIFT + right", hl.dsp.layout("swapcol r"))
+hl.bind(mod .. " + up",    hl.dsp.focus({ direction = "up" }))
+hl.bind(mod .. " + down",  hl.dsp.focus({ direction = "down" }))
+hl.bind(mod .. " + SHIFT + left",  hl.dsp.window.move({ direction = "left" }))
+hl.bind(mod .. " + SHIFT + right", hl.dsp.window.move({ direction = "right" }))
+hl.bind(mod .. " + SHIFT + up",    hl.dsp.window.move({ direction = "up" }))
+hl.bind(mod .. " + SHIFT + down",  hl.dsp.window.move({ direction = "down" }))
 
 -- Switch workspaces with mod + [0-9]
 -- Move active window to a workspace with mod + SHIFT + [0-9]
@@ -212,11 +195,6 @@ for i = 1, 10 do
     hl.bind(mod .. " + " .. key,             hl.dsp.focus({ workspace = i}))
     hl.bind(mod .. " + SHIFT + " .. key,     hl.dsp.window.move({ workspace = i }))
 end
-hl.bind(mod .. " + SHIFT + mouse_up", hl.dsp.window.move({ workspace = "e-1" }))
-hl.bind(mod .. " + SHIFT + mouse_down", hl.dsp.window.move({ workspace = "e+1" }))
-hl.bind(mod .. " + SHIFT + up", hl.dsp.window.move({ workspace = "e-1" }))
-hl.bind(mod .. " + SHIFT + down", hl.dsp.window.move({ workspace = "e+1" }))
-
 -- Example special workspace (scratchpad)
 hl.bind(mod .. " + S",         hl.dsp.workspace.toggle_special("magic"))
 hl.bind(mod .. " + SHIFT + S", hl.dsp.window.move({ workspace = "special:magic" }))
@@ -230,8 +208,8 @@ hl.bind(mod .. " + mouse:272", hl.dsp.window.drag(),   { mouse = true })
 hl.bind(mod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
 -- Laptop multimedia keys for volume and LCD brightness
-hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 2%+"), { locked = true, repeating = true })
-hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%-"),      { locked = true, repeating = true })
+hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"), { locked = true, repeating = true })
+hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"),      { locked = true, repeating = true })
 hl.bind("XF86AudioMute",        hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"),     { locked = true, repeating = true })
 hl.bind("XF86AudioMicMute",     hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"),   { locked = true, repeating = true })
 hl.bind("XF86MonBrightnessUp",  hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%+"),                  { locked = true, repeating = true })

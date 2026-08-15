@@ -4,7 +4,6 @@
     kdePackages.kate
     hyprlauncher
     fzf
-    kdePackages.qtdeclarative
     nil
     grim
     slurp
@@ -14,5 +13,6 @@
     satty
     libnotify
     vscodium-fhs
+    blender
   ]; 
 }

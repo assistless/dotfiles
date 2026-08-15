@@ -9,7 +9,7 @@ Scope {
 
     // Bind the pipewire node so its volume will be tracked
     PwObjectTracker {
-        objects: [ Pipewire.defaultAudioSink ]
+        objects: [Pipewire.defaultAudioSink]
     }
 
     Connections {
