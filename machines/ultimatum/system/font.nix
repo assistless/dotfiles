@@ -1,7 +1,4 @@
 { pkgs, ... }:
-let
-  hitmarker-fonts = pkgs.callPackage ../../../modules/hitmarker-fonts.nix { inherit pkgs; };
-in
 {
   fonts = {
     packages = with pkgs; [
@@ -9,11 +6,8 @@ in
       noto-fonts-cjk-sans
       noto-fonts-color-emoji
       liberation_ttf
-      fira-code
-      fira-code-symbols
+      cascadia-code
       mplus-outline-fonts.githubRelease
-      dina-font
-      proggyfonts
       nerd-fonts.symbols-only
       hitmarker-fonts
     ];
@@ -32,7 +26,7 @@ in
       defaultFonts = {
         serif = [ "Hitmarker Text VF" "Symbols Nerd Font" ];
         sansSerif = [ "Hitmarker Text VF" "Symbols Nerd Font" ];
-        monospace = [ "Fira Code" "Symbols Nerd Font" ];
+        monospace = [ "Cascadia Code" "Symbols Nerd Font" ];
       };
     };
   };

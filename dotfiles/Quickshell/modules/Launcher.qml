@@ -53,9 +53,9 @@ PanelWindow {
 
     Rectangle {
         id: launcher
+        anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: parent.top
         anchors.bottom: parent.bottom
-        anchors.right: parent.right
         anchors {
             topMargin: 8
             bottomMargin: 8

@@ -14,5 +14,12 @@
     libnotify
     vscodium-fhs
     blender
+    godot
+    sm64coopdx
+    r2modman
+    papirus-folders
+    gearlever
+    azaharplus
+    eden
   ]; 
 }

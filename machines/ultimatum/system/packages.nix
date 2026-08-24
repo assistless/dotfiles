@@ -7,5 +7,6 @@
     git
     kdePackages.ark
     kdePackages.qtdeclarative
+    sshfs
   ];
 }

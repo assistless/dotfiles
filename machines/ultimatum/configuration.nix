@@ -5,6 +5,25 @@
 { config, lib, pkgs, ... }:
 
 {
+  networking.extraHosts = ''
+    192.168.1.14  volcanic.local  volcanic
+  '';
+
+  services.gvfs.enable = true;
+  programs.fuse.userAllowOther = true;
+
+  services.avahi = {
+    enable = true;
+    nssmdns4 = true;
+  };
+
+  programs.kdeconnect.enable = true;
+  
+  nixpkgs.config.allowUnfree = true;
+  
+  programs.nix-ld = {
+    enable = true;
+  };
 
   # swap
   swapDevices = [{
@@ -45,7 +64,7 @@
   # time zone
   time.timeZone = "Asia/Ho_Chi_Minh";
 
-  # sound.
+  # sound
   services.pipewire = {
     enable = true;
     pulse.enable = true;
@@ -53,13 +72,6 @@
 
   # touchpad
   services.libinput.enable = true;
-
-  # user
-  users.users.demi = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" "input" ];
-    # packages = with pkgs; [];
-  };
 
   # misc
   programs.mtr.enable = true;
@@ -70,11 +82,6 @@
 
   # ssh
   services.openssh.enable = true;
-
-  # firewall
-  networking.firewall.allowedTCPPorts = [ 25565 19132 ];
-  networking.firewall.allowedUDPPorts = [ 25565 19132 ];
-  networking.firewall.enable = false;
 
   system.stateVersion = "26.05"; # dont change
 

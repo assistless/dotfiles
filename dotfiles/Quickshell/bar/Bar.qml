@@ -69,7 +69,6 @@ Scope {
 
                 Compartment {
                     horizontalPadding: 4
-
                     NotificationCenter {
                         id: notifications
                     }
