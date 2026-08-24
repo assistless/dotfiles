@@ -22,7 +22,7 @@
       base0E = "2554b1";
       base0F = "b12582";
     };
-    stylix.polarity = "dark";
+    polarity = "dark";
     fonts = {
       serif = {
         package = pkgs.hitmarker-fonts;
