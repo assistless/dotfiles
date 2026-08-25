@@ -64,14 +64,17 @@ Scope {
         }
 
         Rectangle {
-            anchors.top: parent.top
-            anchors.horizontalCenter: parent.horizontalCenter
-            anchors.topMargin: 8
+            anchors {
+                top: parent.top
+                right: parent.right
+                bottom: parent.bottom
+                margins: 8
+            }
             implicitWidth: 380
             clip: true
-            property int emptyHeight: 120
-            property int maxHeight: 420
-            height: Math.min(Math.max(emptyHeight, headerRow.implicitHeight + centerCol.spacing + cardCol.contentHeight + 20), maxHeight)
+            //property int emptyHeight: 120
+            //property int maxHeight: 420
+            //height: Math.min(Math.max(emptyHeight, headerRow.implicitHeight + centerCol.spacing + cardCol.contentHeight + 20), maxHeight)
             border {
                 color: Config.colors.border
                 width: 1
@@ -80,6 +83,12 @@ Scope {
             MouseArea {
                 anchors.fill: parent
                 onClicked: {}
+            }
+            Text {
+                anchors.centerIn: parent
+                visible: history.count < 1
+                text: "No notifications"
+                color: Config.colors.textMuted
             }
             ColumnLayout {
                 id: centerCol

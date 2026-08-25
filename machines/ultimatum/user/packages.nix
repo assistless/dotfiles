@@ -19,7 +19,6 @@
     r2modman
     papirus-folders
     gearlever
-    azaharplus
     eden
   ]; 
 }

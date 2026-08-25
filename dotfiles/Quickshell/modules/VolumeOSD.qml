@@ -3,6 +3,7 @@ import QtQuick.Layouts
 import Quickshell
 import Quickshell.Services.Pipewire
 import Quickshell.Widgets
+import "../config.js" as Config
 
 Scope {
     id: root
@@ -53,7 +54,7 @@ Scope {
             Rectangle {
                 anchors.fill: parent
                 radius: height / 2
-                color: "#80000000"
+                color: Qt.alpha(Config.colors.bgDark, 0.95)
 
                 RowLayout {
                     anchors {
@@ -64,7 +65,7 @@ Scope {
 
                     IconImage {
                         implicitSize: 30
-                        source: Quickshell.iconPath("org.gnome.Settings-sound-symbolic")
+                        source: Quickshell.iconPath("audio-volume-high-symbolic")
                     }
 
                     Rectangle {
@@ -72,8 +73,7 @@ Scope {
                         Layout.fillWidth: true
 
                         implicitHeight: 10
-                        radius: 20
-                        color: "#50ffffff"
+                        color: Config.colors.textMuted
 
                         Rectangle {
                             anchors {
@@ -81,9 +81,8 @@ Scope {
                                 top: parent.top
                                 bottom: parent.bottom
                             }
-
+                            color: Config.colors.text
                             implicitWidth: parent.width * (Pipewire.defaultAudioSink?.audio.volume ?? 0)
-                            radius: parent.radius
                         }
                     }
                 }

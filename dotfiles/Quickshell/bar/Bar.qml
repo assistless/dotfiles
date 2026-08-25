@@ -8,7 +8,42 @@ Scope {
     Variants {
         model: Quickshell.screens
         PanelWindow {
-            id: bar
+            id: barLeft
+            required property var modelData
+            screen: modelData
+
+            anchors {
+                top: true
+                left: true
+                bottom: true
+            }
+
+            color: Config.colors.bgDark
+            implicitWidth: 30
+            ColumnLayout {
+                anchors.fill: parent
+                spacing: 10
+                Workspaces {
+                    Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+                    Layout.topMargin: 6
+                }
+                Item {
+                    Layout.fillHeight: true
+                }
+                Tray {
+                    Layout.alignment: Qt.AlignHCenter | Qt.AlignBottom
+                }
+                Volume {
+                    Layout.alignment: Qt.AlignHCenter | Qt.AlignBottom
+                    Layout.bottomMargin: 6
+                }
+            }
+        }
+    }
+    Variants {
+        model: Quickshell.screens
+        PanelWindow {
+            id: barTop
             required property var modelData
             screen: modelData
 
@@ -18,65 +53,30 @@ Scope {
                 right: true
             }
 
-            color: "transparent"
-            implicitHeight: 32
-
+            color: Config.colors.bgDark
+            implicitHeight: 25
+            Text {
+                id: clockText
+                text: Time.fullDisplay
+                color: Config.colors.text
+                anchors.centerIn: parent
+            }
             RowLayout {
                 anchors.fill: parent
-                anchors.topMargin: 3
-                anchors.bottomMargin: 3
-                anchors.leftMargin: 3
-                anchors.rightMargin: 3
-                spacing: 8
-
-                Compartment {
-                    Workspaces {
-                        id: workspaces
-                    }
-                }
-
+                spacing: 5
                 Item {
                     Layout.fillWidth: true
                 }
-
-                Compartment {
-                    Tray {
-                        id: tray
-                    }
+                Search {
+                    Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
                 }
-
-                Compartment {
-                    Volume {}
-                }
-            }
-
-            RowLayout {
-                anchors.centerIn: parent
-                anchors.top: parent.top
-                anchors.bottom: parent.bottom
-                anchors.topMargin: 3
-                anchors.bottomMargin: 3
-                spacing: 8
-
-                Compartment {
-                    Text {
-                        id: clockText
-                        text: Time.fullDisplay
-                        color: Config.colors.text
-                        font.pixelSize: 13
-                    }
-                }
-
-                Compartment {
-                    horizontalPadding: 4
-                    NotificationCenter {
-                        id: notifications
-                    }
+                NotificationCenter {
+                    Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
+                    Layout.rightMargin: 5
                 }
             }
         }
     }
-
     component Compartment: Rectangle {
         id: compartment
 

@@ -53,14 +53,11 @@ PanelWindow {
 
     Rectangle {
         id: launcher
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.top: parent.top
-        anchors.bottom: parent.bottom
         anchors {
-            topMargin: 8
-            bottomMargin: 8
-            leftMargin: 8
-            rightMargin: 8
+            top: parent.top
+            right: parent.right
+            bottom: parent.bottom
+            margins: 8
         }
         implicitWidth: 380
         color: Config.colors.bgDark
@@ -116,11 +113,11 @@ PanelWindow {
             ListView {
                 id: appList
                 width: parent.width
-                height: parent.height - 60
+                height: parent.height - 55
                 clip: true
                 spacing: 2
                 model: root.filteredApps
-
+                boundsBehavior: Flickable.StopAtBounds
                 delegate: Rectangle {
                     width: appList.width
                     implicitHeight: 36

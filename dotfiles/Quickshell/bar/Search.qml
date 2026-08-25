@@ -9,7 +9,7 @@ Rectangle {
     id: root
     color: Config.colors.bg
     implicitHeight: 20
-    implicitWidth: layout.implicitWidth + 10
+    implicitWidth: 20
     border {
         color: Config.colors.border
         width: 1
@@ -19,18 +19,13 @@ Rectangle {
         anchors.centerIn: parent
         spacing: 2
         Text {
-            text: ""
+            text: "  "
             color: Config.colors.text
             font.pixelSize: 12
-        }
-        Text {
-            text: NotificationCount.count
-            color: Config.colors.text
-            visible: NotificationCount.count > 0
         }
     }
     MouseArea {
         anchors.fill: parent
-        onClicked: Quickshell.execDetached(["qs", "ipc", "call", "notifications", "toggle"])
+        onClicked: Quickshell.execDetached(["qs", "ipc", "call", "launcher", "toggle"])
     }
 }

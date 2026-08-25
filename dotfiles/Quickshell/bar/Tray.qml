@@ -6,7 +6,7 @@ import Quickshell
 import Quickshell.Widgets
 import Quickshell.Services.SystemTray
 
-Row {
+Column {
     spacing: 12
 
     Repeater {
