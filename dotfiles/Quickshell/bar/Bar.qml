@@ -1,4 +1,5 @@
 import Quickshell
+import Quickshell.Wayland
 import qs.modules
 import QtQuick
 import QtQuick.Layouts
@@ -8,17 +9,17 @@ Scope {
     Variants {
         model: Quickshell.screens
         PanelWindow {
-            id: barLeft
+            id: barRight
             required property var modelData
             screen: modelData
 
             anchors {
                 top: true
-                left: true
+                right: true
                 bottom: true
             }
 
-            color: Config.colors.bgDark
+            color: Qt.alpha(Config.colors.bgDark, 0.8)
             implicitWidth: 30
             ColumnLayout {
                 anchors.fill: parent
@@ -53,7 +54,7 @@ Scope {
                 right: true
             }
 
-            color: Config.colors.bgDark
+            color: Qt.alpha(Config.colors.bgDark, 0.78)
             implicitHeight: 25
             Text {
                 id: clockText
@@ -72,7 +73,7 @@ Scope {
                 }
                 NotificationCenter {
                     Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
-                    Layout.rightMargin: 5
+                    Layout.rightMargin: 0
                 }
             }
         }

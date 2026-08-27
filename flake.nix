@@ -6,6 +6,10 @@
       url = "github:nix-community/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    lanzaboote = {
+      url = "github:nix-community/lanzaboote/v1.1.0";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -13,6 +17,7 @@
       nixpkgs,
       home-manager,
       stylix,
+      lanzaboote,
       ...
     }:
     let
@@ -31,13 +36,22 @@
             stylix.nixosModules.stylix
             ./machines/ultimatum/configuration.nix
             home-manager.nixosModules.home-manager
-            {
+            lanzaboote.nixosModules.lanzaboote
+            ({ lib, ... }:{
               nixpkgs.overlays = overlays;
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.extraSpecialArgs = { inherit inputs; };
               home-manager.users.demi = ./machines/ultimatum/home.nix;
-            }
+              boot.loader.systemd-boot.enable = lib.mkForce false;
+              boot.loader.efi.canTouchEfiVariables = true;
+              boot.loader.efi.efiSysMountPoint = "/boot/efi";
+              boot.lanzaboote = {
+                enable = true;
+                pkiBundle = "/var/lib/sbctl";
+                configurationLimit = 3;
+              };
+            })
           ];
         };
         #       volcanic = nixpkgs.lib.nixosSystem {

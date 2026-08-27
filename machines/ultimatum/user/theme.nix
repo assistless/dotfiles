@@ -1,8 +1,11 @@
 { ... }:
 {
   stylix = {
+    enable = true;
     targets.gtk.extraCss = ''
-      * { border-radius: 0 !important; }
+      *:not(switch):not(.circular) {
+        border-radius: 0 !important;
+      }
     '';
     targets.firefox.profileNames = [ "default" ];
   };

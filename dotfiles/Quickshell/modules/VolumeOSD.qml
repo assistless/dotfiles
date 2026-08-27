@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import Quickshell
+import Quickshell.Wayland
 import Quickshell.Services.Pipewire
 import Quickshell.Widgets
 import "../config.js" as Config
@@ -40,8 +41,8 @@ Scope {
             // Since the panel's screen is unset, it will be picked by the compositor
             // when the window is created. Most compositors pick the current active monitor.
 
-            anchors.bottom: true
-            margins.bottom: screen.height / 5
+            anchors.top: true
+            margins.top: 0
             exclusiveZone: 0
 
             implicitWidth: 400
@@ -50,12 +51,10 @@ Scope {
 
             // An empty click mask prevents the window from blocking mouse events.
             mask: Region {}
-
             Rectangle {
                 anchors.fill: parent
-                radius: height / 2
-                color: Qt.alpha(Config.colors.bgDark, 0.95)
-
+                color: Qt.alpha(Config.colors.bgDark, 0.75)
+                id: osd
                 RowLayout {
                     anchors {
                         fill: parent

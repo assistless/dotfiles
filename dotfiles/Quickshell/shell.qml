@@ -10,4 +10,5 @@ Scope {
     Notifications {}
     Launcher {}
     Wallpaper {}
+    Lockscreen {}
 }

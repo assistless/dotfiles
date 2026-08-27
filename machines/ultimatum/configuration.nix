@@ -44,17 +44,6 @@
   # import
   imports = lib.fileset.toList (lib.fileset.difference (lib.fileset.fileFilter (f: f.hasExt "nix") ./system) (./configuration.nix));
 
-  # boot
-  boot.loader = {
-    grub = {
-      enable = true;
-      device = "nodev";
-      efiSupport= true;
-    };
-    efi.canTouchEfiVariables = true;
-    efi.efiSysMountPoint = "/boot/efi";
-  };
-
   # hostname
   networking.hostName = "ultimatum";
 

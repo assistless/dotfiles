@@ -2,7 +2,7 @@ var colors = {
   bgDark: Qt.hsla(0.000, 0.000, 0.051, 1.0),
   bg: Qt.hsla(0.000, 0.000, 0.102, 1.0),
   bgLight: Qt.hsla(0.000, 0.000, 0.149, 1.0),
-  border: Qt.hsla(0.000, 0.000, 0.302, 1.0),
+  border: Qt.hsla(0.000, 0.000, 0.300, 1.0),
   textMuted: Qt.hsla(0.000, 0.000, 0.702, 1.0),
   text: Qt.hsla(0.000, 0.000, 0.902, 1.0),
   accent: Qt.hsla(0.750, 0.654, 0.420, 1.0),

@@ -1,10 +1,11 @@
 pragma ComponentBehavior: Bound
 
 import QtQuick
-import QtQuick.Controls.Fusion
+import QtQuick.Controls
 import Quickshell
 import Quickshell.Widgets
 import Quickshell.Services.SystemTray
+import "../config.js" as Config
 
 Column {
     spacing: 12
@@ -47,7 +48,7 @@ Column {
         id: trayMenu
 
         property alias model: iconImageMenuInstantiator.model
-
+        
         popupType: Popup.Window
 
         Instantiator {

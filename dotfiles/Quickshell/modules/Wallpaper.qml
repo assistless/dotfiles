@@ -20,7 +20,7 @@ PanelWindow {
     }
     Image {
         source: "file://" + Quickshell.shellPath("wallpaper.jpg")
-        fillMode: Image.PreserveAspectFill
+        fillMode: Image.PreserveAspectCrop
         clip: true
         anchors.fill: parent
     }

@@ -76,10 +76,10 @@ Scope {
             //property int maxHeight: 420
             //height: Math.min(Math.max(emptyHeight, headerRow.implicitHeight + centerCol.spacing + cardCol.contentHeight + 20), maxHeight)
             border {
-                color: Config.colors.border
+                color: Config.colors.accent
                 width: 1
             }
-            color: Config.colors.bgDark
+            color: Qt.alpha(Config.colors.bgDark, 0.8)
             MouseArea {
                 anchors.fill: parent
                 onClicked: {}
@@ -105,6 +105,7 @@ Scope {
                         font.pixelSize: 16
                         color: Config.colors.text
                     }
+                    Item { Layout.fillWidth: true }
                     Text {
                         text: "Clear all"
                         color: Config.colors.textMuted
@@ -135,9 +136,9 @@ Scope {
 
                         width: ListView.view.width
                         height: cardLayout.implicitHeight + 20
-                        color: Config.colors.bg
+                        color: Qt.alpha(Config.colors.bg, 0.8)
                         border.width: 1
-                        border.color: urgency === NotificationUrgency.Critical ? Config.colors.warn : Config.colors.border
+                        border.color: urgency === NotificationUrgency.Critical ? Config.colors.red : Config.colors.border
 
                         ColumnLayout {
                             id: cardLayout
@@ -227,12 +228,12 @@ Scope {
                 delegate: Rectangle {
                     id: card
                     required property var modelData
-
+                    visible: card.modelData.urgency === NotificationUrgency.Low ? false : true
                     Layout.fillWidth: true
                     Layout.preferredHeight: layout.implicitHeight + 20
-                    color: Config.colors.bg
-                    border.width: 2
-                    border.color: urgency === NotificationUrgency.Critical ? Config.colors.warn : Config.colors.border
+                    color: Qt.alpha(Config.colors.bgDark, 0.8)
+                    border.width: 1
+                    border.color: card.modelData.urgency === NotificationUrgency.Critical ? Config.colors.red : Config.colors.border
 
                     Timer {
                         running: card.modelData.urgency !== NotificationUrgency.Critical

@@ -5,17 +5,20 @@ import Quickshell.Wayland
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
+import "../config.js" as Config
 
 Scope {
-    id: root
+    id: scope
+    
     // load as needed
     LazyLoader {
         active: polkitAgent.isActive
         PanelWindow {
+            id: root
             mask: Region {
                 item: popup
             }
-
+            BackgroundEffect.blurRegion: Region { item: root.contentItem }
             anchors {
                 top: true
                 left: true
@@ -23,9 +26,7 @@ Scope {
                 right: true
             }
             exclusionMode: ExclusionMode.Ignore
-
-            color: Qt.alpha("#000000", 0.25) // screen dimming
-
+            color: "transparent"
             WlrLayershell.keyboardFocus: polkitAgent.isActive ? WlrKeyboardFocus.OnDemand : WlrKeyboardFocus.None // grab keyboard focus
 
             WlrLayershell.layer: WlrLayer.Overlay
@@ -56,7 +57,7 @@ Scope {
 
                 implicitHeight: 225
                 visible: true
-                color: "lightgray"
+                color: Config.colors.bgDark
 
                 // content
                 ColumnLayout {
@@ -73,6 +74,7 @@ Scope {
                         text: polkitAgent.flow?.message || "* But no message came."
                         wrapMode: Text.Wrap
                         font.bold: true
+                        color: Config.colors.text
                     }
 
                     Label {
@@ -80,23 +82,26 @@ Scope {
                         text: polkitAgent.flow?.supplementaryMessage || "* But no message came."
                         wrapMode: Text.Wrap
                         opacity: 0.8
+                        color: Config.colors.textMuted
                     }
 
                     Label {
                         Layout.fillWidth: true
                         text: polkitAgent.flow?.inputPrompt || "Authenticating..."
                         wrapMode: Text.Wrap
+                        color: Config.colors.text
                     }
 
                     Label {
                         text: "Authentication failed, try again"
-                        color: "red"
+                        color: Config.colors.red
                         visible: polkitAgent.flow?.failed
                     }
                     // password input
                     Rectangle {
                         width: 500
                         height: 25
+                        color: Config.colors.bg
                         TextInput {
                             id: passwordInput
                             anchors.verticalCenter: parent.verticalCenter
@@ -107,6 +112,7 @@ Scope {
                             Layout.fillWidth: true
                             onAccepted: proceedAuth()
                             Component.onCompleted: passwordInput.forceActiveFocus()
+                            color: Config.colors.text
                         }
                     }
 
@@ -117,6 +123,7 @@ Scope {
                             implicitHeight: 22
                             implicitWidth: 52
                             enabled: passwordInput.text.length > 0 || !!polkitAgent.flow?.isResponseRequired
+                            color: Config.colors.bg
                             MouseArea {
                                 id: okButton
                                 anchors.fill: parent
@@ -125,6 +132,7 @@ Scope {
                             Text {
                                 text: "OK"
                                 anchors.centerIn: parent
+                                color: Config.colors.text
                             }
                         }
                         // cancel button
@@ -132,9 +140,11 @@ Scope {
                             implicitHeight: 22
                             implicitWidth: 52
                             visible: polkitAgent.isActive
+                            color: Config.colors.bg
                             Text {
                                 anchors.centerIn: parent
                                 text: "Cancel"
+                                color: Config.colors.text
                             }
                             MouseArea {
                                 anchors.fill: parent

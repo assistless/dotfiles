@@ -60,9 +60,9 @@ PanelWindow {
             margins: 8
         }
         implicitWidth: 380
-        color: Config.colors.bgDark
+        color: Qt.alpha(Config.colors.bgDark, 0.8)
         border {
-            color: Config.colors.border
+            color: Config.colors.accent
             width: 1
         }
         MouseArea {
@@ -84,7 +84,7 @@ PanelWindow {
             Rectangle {
                 anchors.left: parent.left
                 anchors.right: parent.right
-                color: Config.colors.bg
+                color: Qt.alpha(Config.colors.bg, 0.8)
                 implicitHeight: 25
 
                 TextInput {
@@ -121,7 +121,7 @@ PanelWindow {
                 delegate: Rectangle {
                     width: appList.width
                     implicitHeight: 36
-                    color: mouseArea.containsMouse ? Config.colors.bgLight : Config.colors.bg
+                    color: mouseArea.containsMouse ? Qt.alpha(Config.colors.bgLight, 0.8) : Qt.alpha(Config.colors.bg, 0.8)
 
                     RowLayout {
                         anchors.fill: parent
