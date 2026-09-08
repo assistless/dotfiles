@@ -56,12 +56,12 @@
             })
           ];
         };
-        #       volcanic = nixpkgs.lib.nixosSystem {
-        #         system = "x86_64-linux";
-        #         modules = [
-        #           ./machines/volcanic/root.nix
-        #         ];
-        #       };
+        volcanic = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            ./machines/volcanic/configuration.nix
+          ];
+        };
       };
     };
 }
