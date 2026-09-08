@@ -57,9 +57,9 @@ PanelWindow {
             bottom: true
         }
         margins {
-            top: 8
-            right: 8
-            bottom: 8
+            top: 0
+            right: 0
+            bottom: 0
         }
         visible: root.visible
         WlrLayershell.keyboardFocus: root.visible ? WlrKeyboardFocus.OnDemand : WlrKeyboardFocus.None // grab keyboard focus

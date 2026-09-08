@@ -3,6 +3,9 @@
   programs.nix-ld = {
     enable = true;
     libraries = with pkgs; [
+
+      (pkgs.runCommand "steamrun-lib" {} "mkdir $out; ln -s ${pkgs.steam-run.fhsenv}/usr/lib64 $out/lib")
+
       # List by default
       zlib
       zstd
@@ -20,19 +23,19 @@
       systemd
 
       # My own additions
-      xorg.libXcomposite
-      xorg.libXtst
-      xorg.libXrandr
-      xorg.libXext
-      xorg.libX11
-      xorg.libXfixes
+      libxcomposite
+      libxtst
+      libxrandr
+      libxext
+      libx11
+      libxfixes
       libGL
       libva
       pipewire
-      xorg.libxcb
-      xorg.libXdamage
-      xorg.libxshmfence
-      xorg.libXxf86vm
+      libxcb
+      libxdamage
+      libxshmfence
+      libxxf86vm
       libelf
 
       # Required
@@ -40,7 +43,6 @@
       gtk2
 
       # Inspired by steam
-      # https://github.com/NixOS/nixpkgs/blob/master/pkgs/by-name/st/steam/package.nix#L36-L85
       networkmanager
       vulkan-loader
       libgbm
@@ -49,17 +51,15 @@
       coreutils
       pciutils
       zenity
-      # glibc_multi.bin # Seems to cause issue in ARM
 
-      # # Without these it silently fails
-      xorg.libXinerama
-      xorg.libXcursor
-      xorg.libXrender
-      xorg.libXScrnSaver
-      xorg.libXi
-      xorg.libSM
-      xorg.libICE
-      gnome2.GConf
+      # Without these it silently fails
+      libxinerama
+      libxcursor
+      libxrender
+      libxscrnsaver
+      libxi
+      libsm
+      libice
       nspr
       nss
       cups
@@ -76,23 +76,20 @@
       icu
       libnotify
       gsettings-desktop-schemas
-      # https://github.com/NixOS/nixpkgs/issues/72282
-      # https://github.com/NixOS/nixpkgs/blob/2e87260fafdd3d18aa1719246fd704b35e55b0f2/pkgs/applications/misc/joplin-desktop/default.nix#L16
-      # log in /home/leo/.config/unity3d/Editor.log
-      # it will segfault when opening files if you don’t do:
-      # export XDG_DATA_DIRS=/nix/store/0nfsywbk0qml4faa7sk3sdfmbd85b7ra-gsettings-desktop-schemas-43.0/share/gsettings-schemas/gsettings-desktop-schemas-43.0:/nix/store/rkscn1raa3x850zq7jp9q3j5ghcf6zi2-gtk+3-3.24.35/share/gsettings-schemas/gtk+3-3.24.35/:$XDG_DATA_DIRS
-      # other issue: (Unity:377230): GLib-GIO-CRITICAL **: 21:09:04.706: g_dbus_proxy_call_sync_internal: assertion 'G_IS_DBUS_PROXY (proxy)' failed
 
       # Verified games requirements
-      xorg.libXt
-      xorg.libXmu
+      libxt
+      libxmu
       libogg
       libvorbis
       SDL
       SDL2_image
-      glew110
+      glew_1_10
+      glfw
+      glew.out
       libidn
       tbb
+      alsa-plugins
 
       # Other things from runtime
       flac
@@ -111,17 +108,14 @@
       SDL_mixer
       SDL2_ttf
       SDL2_mixer
-      libappindicator-gtk2
-      libdbusmenu-gtk2
-      libindicator-gtk2
       libcaca
       libcanberra
       libgcrypt
       libvpx
       librsvg
-      xorg.libXft
+      libxft
       libvdpau
-      # ...
+
       # Some more libraries that I needed to run programs
       pango
       cairo
@@ -138,20 +132,18 @@
       libxcrypt-legacy # For natron
       libGLU # For natron
 
-      # Appimages need fuse, e.g. https://musescore.org/fr/download/musescore-x86_64.AppImage
+      # Appimages need fuse
       fuse
       e2fsprogs
 
-      # darktable nightly AppImage https://github.com/darktable-org/darktable/releases
+      # darktable nightly AppImage
       gmp
 
       # RapidRaw
       harfbuzz
       libgpg-error
-      # https://github.com/xournalpp/xournalpp/releases/download/v1.2.4/xournalpp-1.2.4-x86_64.AppImage
       fribidi
       librsvg
-      # https://github.com/nix-community/nix-ld/issues/95#issuecomment-3041993870
       (runCommand "librsvg" { } ''
         mkdir -p $out/lib/gdk-pixbuf-2.0/2.10.0/loaders
         ln -s "${librsvg}/lib/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader_svg.so" "$out/lib/libpixbufloader-svg.so"
@@ -161,15 +153,15 @@
       sane-backends
       pkcs11helper
 
-      # Qt6 requires this (e.g. used in zxlive)
+      # Qt6 requires this
       libpulseaudio
       krb5
       libxcb-cursor
-      xorg.xcbutilwm
-      xorg.xcbutil
-      xorg.xcbutilimage
-      xorg.xcbutilkeysyms
-      xorg.xcbutilrenderutil
+      libxcb-wm
+      libxcb-util
+      libxcb-image
+      libxcb-keysyms
+      libxcb-render-util
 
     ];
   };

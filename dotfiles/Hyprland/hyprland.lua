@@ -100,3 +100,9 @@ hl.window_rule({
     move  = "20 monitor_h-120",
     float = true,
 })
+hl.window_rule({
+    name = "no peaking",
+    match = { class = "^firefox-esr$" },
+
+    no_screen_share = true,
+})

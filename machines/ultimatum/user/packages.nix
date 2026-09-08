@@ -19,6 +19,5 @@
     r2modman
     papirus-folders
     gearlever
-    eden
   ]; 
 }

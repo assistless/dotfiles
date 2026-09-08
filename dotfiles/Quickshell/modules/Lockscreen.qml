@@ -47,25 +47,27 @@ ShellRoot {
                 }
 
                 Rectangle {
-                    anchors.centerIn: parent
-                    color: Config.colors.bgDark
-                    implicitHeight: 250
-                    implicitWidth: 500
-                    border {
-                        color: Config.colors.border
-                        width: 1
-                    }
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    color: Qt.alpha(Config.colors.bgDark, 0.75)
+                    implicitHeight: 175
+                    anchors.bottom: parent.bottom
                     RowLayout {
                         anchors.fill: parent
                         ColumnLayout {
                             Layout.alignment: Qt.AlignVCenter | Qt.AlignLeft
                             Layout.leftMargin: 50
-                            spacing: 15
+                            spacing: 10
 
                             Text {
-                                text: Qt.formatDateTime(new Date(), "hh:mm")
+                                text: Time.timeDisplay
                                 color: Config.colors.text
                                 font.pixelSize: 48
+                            }
+                            Text {
+                                text: Time.dateDisplay
+                                color: Config.colors.text
+                                font.pixelSize: 16
                             }
                         }
                         ColumnLayout {
@@ -103,6 +105,15 @@ ShellRoot {
                                     }
                                 }
                             }
+                        }
+                    }
+                    ColumnLayout {
+                        anchors.centerIn: parent
+                        Text {
+                            text: "󰌾"
+                            color: Config.colors.text
+                            font.pixelSize: 24
+                            Layout.alignment: Qt.AlignHCenter
                         }
                     }
                 }

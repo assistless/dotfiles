@@ -53,7 +53,7 @@ Scope {
             mask: Region {}
             Rectangle {
                 anchors.fill: parent
-                color: Qt.alpha(Config.colors.bgDark, 0.75)
+                color: Qt.alpha(Config.colors.bgDark, 0.5)
                 id: osd
                 RowLayout {
                     anchors {

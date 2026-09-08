@@ -75,6 +75,9 @@ Scope {
                     Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
                     Layout.rightMargin: 0
                 }
+                Power {
+                    Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
+                }
             }
         }
     }

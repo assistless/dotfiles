@@ -38,12 +38,6 @@ Scope {
         function toggle(): void {
             root.centerOpen = !root.centerOpen;
         }
-        function show(): void {
-            root.centerOpen = true;
-        }
-        function hide(): void {
-            root.centerOpen = false;
-        }
     }
     // notification center
     PanelWindow {
@@ -70,9 +64,9 @@ Scope {
                 bottom: true
             }
             margins {
-                top: 8
-                right: 8
-                bottom: 8
+                top: 0
+                right: 0
+                bottom: 0
             }
             visible: centerPanel.visible
             BackgroundEffect.blurRegion: Region {

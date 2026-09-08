@@ -22,6 +22,7 @@ Rectangle {
             text: "󰂚"
             color: Config.colors.text
             font.pixelSize: 13
+            topPadding: -1
         }
         Text {
             text: NotificationCount.count

@@ -9,7 +9,7 @@ import "../config.js" as Config
 
 Scope {
     id: scope
-    
+
     // load as needed
     LazyLoader {
         active: polkitAgent.isActive
@@ -18,7 +18,9 @@ Scope {
             mask: Region {
                 item: popup
             }
-            BackgroundEffect.blurRegion: Region { item: root.contentItem }
+            BackgroundEffect.blurRegion: Region {
+                item: root.contentItem
+            }
             anchors {
                 top: true
                 left: true
@@ -44,6 +46,19 @@ Scope {
                 polkitAgent.flow.cancelAuthenticationRequest();
                 passwordInput.text = "";
             }
+
+            Image {
+                id: wallpaper
+                source: "file://" + Quickshell.shellPath("wallpaper.jpg")
+                fillMode: Image.PreserveAspectCrop
+                clip: true
+                anchors.fill: parent
+                Rectangle {
+                    anchors.fill: parent
+                    color: Qt.alpha("black", 0.75)
+                }
+            }
+
             // the prompt itself
             Rectangle {
                 id: popup
@@ -52,12 +67,12 @@ Scope {
                 anchors {
                     left: parent.left
                     right: parent.right
-                    verticalCenter: parent.verticalCenter
+                    bottom: parent.bottom
                 }
 
-                implicitHeight: 225
+                implicitHeight: 215
                 visible: true
-                color: Config.colors.bgDark
+                color: Qt.alpha(Config.colors.bgDark,1)
 
                 // content
                 ColumnLayout {
@@ -90,13 +105,16 @@ Scope {
                         text: polkitAgent.flow?.inputPrompt || "Authenticating..."
                         wrapMode: Text.Wrap
                         color: Config.colors.text
+                        visible: polkitAgent.flow?.failed == ""
                     }
-
                     Label {
+                        Layout.fillWidth: true
                         text: "Authentication failed, try again"
+                        wrapMode: Text.Wrap
                         color: Config.colors.red
-                        visible: polkitAgent.flow?.failed
+                        visible: polkitAgent.flow?.failed != ""
                     }
+                    
                     // password input
                     Rectangle {
                         width: 500

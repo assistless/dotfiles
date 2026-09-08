@@ -13,7 +13,7 @@ Singleton {
         Qt.formatDateTime(clock.date, "hh:mm:ss AP");
     }
     readonly property string dateDisplay: {
-        Qt.formatDateTime(clock.date, "ddd MMM d, yyyy");
+        Qt.formatDateTime(clock.date, "dddd MMMM d, yyyy");
     }
     SystemClock {
         id: clock

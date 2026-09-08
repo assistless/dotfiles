@@ -22,6 +22,7 @@ Rectangle {
             text: "󰍉"
             color: Config.colors.text
             font.pixelSize: 16
+            topPadding: -1
         }
     }
     MouseArea {
