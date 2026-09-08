@@ -2,12 +2,7 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}:
+{ config, lib, pkgs, ... }:
 
 {
   programs.appimage = {
@@ -15,12 +10,13 @@
     binfmt = true;
   };
 
-  imports = [
-    lib.fileset.toList
-    (lib.fileset.difference (lib.fileset.fileFilter (f: f.hasExt "nix") ./system) (./configuration.nix))
-    lib.fileset.toList
-    (lib.fileset.difference (lib.fileset.fileFilter (f: f.hasExt "nix") ./server) (./configuration.nix))
-  ];
+  imports = lib.fileset.toList (
+  lib.fileset.difference 
+    (lib.fileset.fileFilter (f: f.hasExt "nix") 
+      (lib.fileset.union ./system ./server)
+    ) 
+    ./configuration.nix
+);
 
   boot.loader.grub.enable = true;
   boot.loader.grub.device = "/dev/sda";
@@ -42,14 +38,12 @@
 
   users.users.demi = {
     isNormalUser = true;
-    extraGroups = [
-      "wheel"
-      "networkmanager"
-    ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
       tree
     ];
   };
+
 
   environment.systemPackages = with pkgs; [
     vim
@@ -69,15 +63,8 @@
   # Open ports in the firewall.
   networking.firewall = {
     enable = true;
-    allowedTCPPorts = [
-      25565
-      19132
-    ];
-    allowedUDPPorts = [
-      25565
-      19132
-      config.services.tailscale.port
-    ];
+    allowedTCPPorts = [ 25565 19132 ];
+    allowedUDPPorts = [ 25565 19132 config.services.tailscale.port ];
   };
 
   # This option defines the first version of NixOS you have installed on this particular machine,
@@ -100,3 +87,4 @@
   system.stateVersion = "26.05"; # Did you read the comment?
 
 }
+
