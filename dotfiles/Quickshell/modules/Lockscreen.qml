@@ -10,11 +10,12 @@ import "../config.js" as Config
 ShellRoot {
     WlSessionLock {
         id: lock
-        locked: true
+        locked: false
         WlSessionLockSurface {
             Rectangle {
                 anchors.fill: parent
                 color: Config.colors.bgDark
+
                 Image {
                     source: "file://" + Quickshell.shellPath("wallpaper.jpg")
                     fillMode: Image.PreserveAspectCrop

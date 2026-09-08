@@ -55,7 +55,6 @@ Scope {
             right: true
         }
         exclusiveZone: 0
-        WlrLayershell.layer: WlrLayer.Overlay
         color: "transparent"
         visible: root.centerOpen
         MouseArea {
@@ -63,23 +62,27 @@ Scope {
             onClicked: ipc.hide()
         }
 
-        Rectangle {
+        PanelWindow {
+            id: panel
             anchors {
-                top: parent.top
-                right: parent.right
-                bottom: parent.bottom
-                margins: 8
+                top: true
+                right: true
+                bottom: true
             }
+            margins {
+                top: 8
+                right: 8
+                bottom: 8
+            }
+            visible: centerPanel.visible
+            BackgroundEffect.blurRegion: Region {
+                item: panel.contentItem
+            }
+            WlrLayershell.keyboardFocus: root.visible ? WlrKeyboardFocus.OnDemand : WlrKeyboardFocus.None // grab keyboard focus
+            WlrLayershell.layer: WlrLayer.Overlay
+            exclusiveZone: 0
             implicitWidth: 380
-            clip: true
-            //property int emptyHeight: 120
-            //property int maxHeight: 420
-            //height: Math.min(Math.max(emptyHeight, headerRow.implicitHeight + centerCol.spacing + cardCol.contentHeight + 20), maxHeight)
-            border {
-                color: Config.colors.accent
-                width: 1
-            }
-            color: Qt.alpha(Config.colors.bgDark, 0.8)
+            color: Qt.alpha(Config.colors.bgDark, 0.5)
             MouseArea {
                 anchors.fill: parent
                 onClicked: {}
@@ -105,14 +108,26 @@ Scope {
                         font.pixelSize: 16
                         color: Config.colors.text
                     }
-                    Item { Layout.fillWidth: true }
-                    Text {
-                        text: "Clear all"
-                        color: Config.colors.textMuted
-                        visible: history.count > 0
-                        MouseArea {
-                            anchors.fill: parent
-                            onClicked: history.clear()
+                    Item {
+                        Layout.fillWidth: true
+                    }
+                    Rectangle {
+                        implicitHeight: 20
+                        implicitWidth: clearText.width + 10
+                        color: history.count > 0 ? Config.colors.bg : Config.colors.bgLight
+                        border {
+                            width: 1
+                            color: Config.colors.border
+                        }
+                        Text {
+                            id: clearText
+                            anchors.centerIn: parent
+                            text: "Clear"
+                            color: history.count > 0 ? Config.colors.text : Config.colors.textMuted
+                            MouseArea {
+                                anchors.fill: parent
+                                onClicked: history.clear()
+                            }
                         }
                     }
                 }
@@ -136,7 +151,7 @@ Scope {
 
                         width: ListView.view.width
                         height: cardLayout.implicitHeight + 20
-                        color: Qt.alpha(Config.colors.bg, 0.8)
+                        color: Qt.alpha(Config.colors.bg, 0.5)
                         border.width: 1
                         border.color: urgency === NotificationUrgency.Critical ? Config.colors.red : Config.colors.border
 
@@ -154,12 +169,37 @@ Scope {
                                     Layout.fillWidth: true
                                     spacing: 5
 
-                                    Text {
-                                        Layout.fillWidth: true
-                                        text: cardDelegate.summary
-                                        font.bold: true
-                                        elide: Text.ElideRight
-                                        color: Config.colors.text
+                                    RowLayout {
+                                        Text {
+                                            Layout.fillWidth: true
+                                            text: cardDelegate.summary
+                                            font.bold: true
+                                            elide: Text.ElideRight
+                                            color: Config.colors.text
+                                        }
+                                        Item {
+                                            Layout.fillWidth: true
+                                        }
+                                        Rectangle {
+                                            Layout.alignment: Qt.AlignTop
+                                            implicitHeight: 20
+                                            implicitWidth: 20
+                                            color: Config.colors.bgLight
+                                            border {
+                                                width: 1
+                                                color: Config.colors.border
+                                            }
+                                            Text {
+                                                text: "󰅖"
+                                                anchors.centerIn: parent
+                                                color: Config.colors.textMuted
+                                                font.pixelSize: 16
+                                            }
+                                            MouseArea {
+                                                anchors.fill: parent
+                                                onClicked: history.remove(cardDelegate.index)
+                                            }
+                                        }
                                     }
                                     Text {
                                         Layout.fillWidth: true
@@ -173,24 +213,21 @@ Scope {
                                         color: Config.colors.border
                                         implicitHeight: 2
                                     }
-                                    Text {
-                                        visible: cardDelegate.appName !== ""
-                                        text: cardDelegate.appName
-                                        color: Config.colors.textMuted
-                                    }
-                                }
-                                Text {
-                                    text: cardDelegate.time
-                                    Layout.alignment: Qt.AlignTop
-                                    color: Config.colors.textMuted
-                                }
-                                Text {
-                                    text: "x"
-                                    Layout.alignment: Qt.AlignTop
-                                    color: Config.colors.textMuted
-                                    MouseArea {
-                                        anchors.fill: parent
-                                        onClicked: history.remove(cardDelegate.index)
+                                    RowLayout {
+                                        Text {
+                                            visible: cardDelegate.appName !== "Unknown app"
+                                            text: cardDelegate.appName
+                                            color: Config.colors.textMuted
+                                        }
+                                        Item {
+                                            Layout.fillWidth: true
+                                        }
+                                        Text {
+                                            text: cardDelegate.time
+                                            Layout.alignment: Qt.AlignTop
+                                            Layout.topMargin: 3
+                                            color: Config.colors.textMuted
+                                        }
                                     }
                                 }
                             }
@@ -207,8 +244,8 @@ Scope {
             right: true
         }
         margins {
-            top: 12
-            right: 12
+            top: 8
+            right: 8
         }
 
         implicitWidth: 380
@@ -231,10 +268,10 @@ Scope {
                     visible: card.modelData.urgency === NotificationUrgency.Low ? false : true
                     Layout.fillWidth: true
                     Layout.preferredHeight: layout.implicitHeight + 20
-                    color: Qt.alpha(Config.colors.bgDark, 0.8)
+                    color: Qt.alpha(Config.colors.bgDark, 0.5)
                     border.width: 1
                     border.color: card.modelData.urgency === NotificationUrgency.Critical ? Config.colors.red : Config.colors.border
-
+                    clip: true
                     Timer {
                         running: card.modelData.urgency !== NotificationUrgency.Critical
                         interval: 5000
@@ -259,12 +296,43 @@ Scope {
                             Layout.fillWidth: true
                             spacing: 5
 
-                            Text {
-                                Layout.fillWidth: true
-                                text: card.modelData.summary
-                                font.bold: true
-                                elide: Text.ElideRight
-                                color: Config.colors.text
+                            RowLayout {
+                                Text {
+                                    Layout.fillWidth: true
+                                    text: card.modelData.summary
+                                    font.bold: true
+                                    elide: Text.ElideRight
+                                    color: Config.colors.text
+                                }
+                                Item {
+                                    Layout.fillWidth: true
+                                }
+                                Text {
+                                    text: Qt.formatDateTime(new Date(), "HH:mm")
+                                    Layout.alignment: Qt.AlignTop
+                                    Layout.topMargin: 3
+                                    color: Config.colors.textMuted
+                                }
+                                Rectangle {
+                                    Layout.alignment: Qt.AlignTop | Qt.AlignRight
+                                    implicitHeight: 20
+                                    implicitWidth: 20
+                                    color: Config.colors.bgLight
+                                    border {
+                                        width: 1
+                                        color: Config.colors.border
+                                    }
+                                    Text {
+                                        text: "󰅖"
+                                        anchors.centerIn: parent
+                                        color: Config.colors.textMuted
+                                        font.pixelSize: 16
+                                    }
+                                    MouseArea {
+                                        anchors.fill: parent
+                                        onClicked: card.modelData.dismiss()
+                                    }
+                                }
                             }
 
                             Text {
@@ -281,23 +349,40 @@ Scope {
                             }
                             RowLayout {
                                 Text {
-                                    text: "Click to dismiss"
-                                    color: Config.colors.text
+                                    visible: card.modelData.appName !== "Unknown app"
+                                    text: card.modelData.appName
+                                    color: Config.colors.textMuted
                                 }
                                 Item {
                                     Layout.fillWidth: true
                                 }
-                                Text {
-                                    visible: card.modelData.appName !== ""
-                                    text: card.modelData.appName
-                                    color: Config.colors.textMuted
+                                RowLayout {
+                                    visible: card.modelData.actions.length > 0
+                                    spacing: 4
+
+                                    Repeater {
+                                        model: card.modelData.actions
+
+                                        delegate: Rectangle {
+                                            implicitWidth: actionText.width + 25
+                                            implicitHeight: 25
+                                            visible: card.modelData.actions.length > 0
+                                            color: Qt.alpha(Config.colors.bg, 0.5)
+                                            border {
+                                                width: 1
+                                                color: Config.colors.border
+                                            }
+                                            Text {
+                                                id: actionText
+                                                anchors.centerIn: parent
+                                                text: modelData.text
+                                                color: Config.colors.text
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
-                    }
-                    MouseArea {
-                        anchors.fill: parent
-                        onClicked: card.modelData.dismiss()
                     }
                 }
             }

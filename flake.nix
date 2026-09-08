@@ -37,7 +37,7 @@
             ./machines/ultimatum/configuration.nix
             home-manager.nixosModules.home-manager
             lanzaboote.nixosModules.lanzaboote
-            ({ lib, ... }:{
+            ({ lib, ... }: {
               nixpkgs.overlays = overlays;
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
@@ -46,11 +46,13 @@
               boot.loader.systemd-boot.enable = lib.mkForce false;
               boot.loader.efi.canTouchEfiVariables = true;
               boot.loader.efi.efiSysMountPoint = "/boot/efi";
-              boot.lanzaboote = {
+              boot.loader.grub = {
                 enable = true;
-                pkiBundle = "/var/lib/sbctl";
-                configurationLimit = 3;
+                device = "nodev";
+                efiSupport = true;
+                copyKernels = false;
               };
+              boot.initrd.compressor = "xz";
             })
           ];
         };

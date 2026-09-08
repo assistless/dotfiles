@@ -12,7 +12,7 @@ ColumnLayout {
             height: 20
             property var ws: Hyprland.workspaces.values.find(w => w.id === index + 1)
             property bool isActive: Hyprland.focusedWorkspace?.id === (index + 1)
-            color: isActive ? Config.colors.accent : (ws ? Config.colors.bgLight : Config.colors.bg)
+            color: isActive ? Config.colors.accent : (ws ? Qt.alpha(Config.colors.bgLight, 0.5) : Qt.alpha(Config.colors.bg, 0.5))
             border {
                 width: 1
                 color: isActive ? Config.colors.border : (ws ? Config.colors.accent : Config.colors.border)

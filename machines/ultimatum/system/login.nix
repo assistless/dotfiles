@@ -1,4 +1,13 @@
 { pkgs , ... }:
 {
-  services.getty.autologinUser = "alice";
+  services.displayManager = {
+    sddm = {
+      enable = true;
+      wayland.enable = true;
+    };
+    autoLogin = {
+      enable = true;
+      user = "demi";
+    };
+  };
 }

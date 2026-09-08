@@ -2,9 +2,15 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
+  boot.kernelPackages = pkgs.linuxPackages_latest;
   networking.extraHosts = ''
     192.168.1.14  volcanic.local  volcanic
   '';
@@ -18,18 +24,16 @@
   };
 
   programs.kdeconnect.enable = true;
-  
+
   nixpkgs.config.allowUnfree = true;
-  
-  programs.nix-ld = {
-    enable = true;
-  };
 
   # swap
-  swapDevices = [{
-    device = "/swap/swapfile";
-    size = 8*1024; # Creates an 8GB swap file
-  }];
+  swapDevices = [
+    {
+      device = "/swap/swapfile";
+      size = 8 * 1024; # Creates an 8GB swap file
+    }
+  ];
 
   # flatpak
   services.flatpak.enable = true;
@@ -39,10 +43,15 @@
   security.polkit.enablePkexecWrapper = true;
 
   # flakes
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   # import
-  imports = lib.fileset.toList (lib.fileset.difference (lib.fileset.fileFilter (f: f.hasExt "nix") ./system) (./configuration.nix));
+  imports = lib.fileset.toList (
+    lib.fileset.difference (lib.fileset.fileFilter (f: f.hasExt "nix") ./system) (./configuration.nix)
+  );
 
   # hostname
   networking.hostName = "ultimatum";
@@ -75,4 +84,3 @@
   system.stateVersion = "26.05"; # dont change
 
 }
-

@@ -7,7 +7,7 @@ import "../config.js" as Config
 
 Rectangle {
     id: root
-    color: Config.colors.bg
+    color: Qt.alpha(Config.colors.bg, 0.5)
     implicitHeight: 20
     implicitWidth: 20
     border {
@@ -19,9 +19,9 @@ Rectangle {
         anchors.centerIn: parent
         spacing: 2
         Text {
-            text: "  "
+            text: "󰍉"
             color: Config.colors.text
-            font.pixelSize: 12
+            font.pixelSize: 16
         }
     }
     MouseArea {

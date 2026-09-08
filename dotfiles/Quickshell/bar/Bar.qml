@@ -18,8 +18,8 @@ Scope {
                 right: true
                 bottom: true
             }
-
-            color: Qt.alpha(Config.colors.bgDark, 0.8)
+            BackgroundEffect.blurRegion: Region { item: barRight.contentItem }
+            color: Qt.alpha(Config.colors.bgDark, 0.5)
             implicitWidth: 30
             ColumnLayout {
                 anchors.fill: parent
@@ -47,14 +47,14 @@ Scope {
             id: barTop
             required property var modelData
             screen: modelData
-
+            BackgroundEffect.blurRegion: Region { item:barTop.contentItem }
             anchors {
                 top: true
                 left: true
                 right: true
             }
-
-            color: Qt.alpha(Config.colors.bgDark, 0.78)
+                
+            color: Qt.alpha(Config.colors.bgDark, 0.5)
             implicitHeight: 25
             Text {
                 id: clockText

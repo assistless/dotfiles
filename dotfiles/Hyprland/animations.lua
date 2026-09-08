@@ -13,5 +13,5 @@ hl.animation({ leaf = "windowsIn", enabled = true, speed = 5, spring = "niri", s
 hl.animation({ leaf = "windowsOut", enabled = true, speed = 1, bezier = "easeOutQuint", style = "slide" })
 hl.animation({ leaf = "windowsMove", enabled = true, speed = 0.1, spring = "niri" })
 hl.animation({ leaf = "workspaces", enabled = true, speed = 3, spring = "niri", style = "slidevert" })
-hl.animation({ leaf = "specialWorkspace", enabled = true, speed = 2, spring = "niri", style = "slidefadevert" })
+hl.animation({ leaf = "specialWorkspace", enabled = true, speed = 2, spring = "niri", style = "slidevert" })
 -- Ref https://wiki.hypr.land/Configuring/Basics/Workspace-Rules/

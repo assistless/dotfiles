@@ -16,8 +16,6 @@ PanelWindow {
         right: true
     }
     exclusiveZone: 0
-    WlrLayershell.keyboardFocus: root.visible ? WlrKeyboardFocus.OnDemand : WlrKeyboardFocus.None // grab keyboard focus
-    WlrLayershell.layer: WlrLayer.Overlay
     color: "transparent"
     visible: false
     MouseArea {
@@ -51,19 +49,26 @@ PanelWindow {
         return all.filter(app => app.name.toLowerCase().includes(q));
     }
 
-    Rectangle {
+    PanelWindow {
         id: launcher
         anchors {
-            top: parent.top
-            right: parent.right
-            bottom: parent.bottom
-            margins: 8
+            top: true
+            right: true
+            bottom: true
         }
+        margins {
+            top: 8
+            right: 8
+            bottom: 8
+        }
+        visible: root.visible
+        WlrLayershell.keyboardFocus: root.visible ? WlrKeyboardFocus.OnDemand : WlrKeyboardFocus.None // grab keyboard focus
+        WlrLayershell.layer: WlrLayer.Overlay
+        exclusiveZone: 0
         implicitWidth: 380
-        color: Qt.alpha(Config.colors.bgDark, 0.8)
-        border {
-            color: Config.colors.accent
-            width: 1
+        color: Qt.alpha(Config.colors.bgDark, 0.5)
+        BackgroundEffect.blurRegion: Region {
+            item: launcher.contentItem
         }
         MouseArea {
             anchors.fill: parent
@@ -84,9 +89,9 @@ PanelWindow {
             Rectangle {
                 anchors.left: parent.left
                 anchors.right: parent.right
-                color: Qt.alpha(Config.colors.bg, 0.8)
+                color: Qt.alpha(Config.colors.bgLight, 0.5)
                 implicitHeight: 25
-
+                
                 TextInput {
                     id: search
                     anchors.verticalCenter: parent.verticalCenter
@@ -121,8 +126,7 @@ PanelWindow {
                 delegate: Rectangle {
                     width: appList.width
                     implicitHeight: 36
-                    color: mouseArea.containsMouse ? Qt.alpha(Config.colors.bgLight, 0.8) : Qt.alpha(Config.colors.bg, 0.8)
-
+                    color: mouseArea.containsMouse ? Qt.alpha(Config.colors.accent, 0.5) : "transparent"
                     RowLayout {
                         anchors.fill: parent
                         anchors.leftMargin: 6
@@ -141,7 +145,7 @@ PanelWindow {
                             elide: Text.ElideRight
                             Layout.fillWidth: true
                             Layout.alignment: Qt.AlignVCenter
-                            color: Config.colors.textMuted
+                            color: mouseArea.containsMouse ? Config.colors.text : Config.colors.textMuted
                         }
                     }
 
