@@ -1,14 +1,24 @@
-// shell.qml
-import Quickshell
+import QtQuick
+import Quickshell 
+import Quickshell.Wayland
 import qs.bar
 import qs.modules
 
-Scope {
-    Bar {}
-    PolkitAgent {}
-    VolumeOSD {}
-    Notifications {}
-    Launcher {}
-    Wallpaper {}
-    Lockscreen {}
+ShellRoot {
+  Variants {
+    model: Quickshell.screens
+    PanelWindow {
+      exclusionMode: ExclusionMode.Ignore
+      anchors {
+        left: true
+        right: true
+        top: true
+        bottom: true
+      }
+      WlrLayershell.layer: WlrLayer.Bottom
+      color: Config.colors.bgDark
+    }
+  }
+  Bar {}
+  Notification {}
 }

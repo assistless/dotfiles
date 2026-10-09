@@ -4,22 +4,22 @@ import Quickshell
 import Quickshell.Widgets
 import Quickshell.Wayland
 import Quickshell.Io
+import qs.modules
 import "../config.js" as Config
 
 Rectangle {
     id: root
-    color: Qt.alpha(Config.colors.bg, 0.5)
-    implicitHeight: 20
-    implicitWidth: 20
-    border {
-        color: Config.colors.border
-        width: 1
-    }
+    color: mouse.containsPress ? Qt.alpha(Config.colors.accentDark, 1) : menu.visible ? Config.colors.accentDark : mouse.containsMouse ? Qt.alpha(Config.colors.accent, 1) : Qt.alpha(Config.colors.bg, 1)
+    implicitHeight: 19
+    implicitWidth: 19
+    radius: 10
 
     function toggle(): void {
         menu.visible = !menu.visible;
     }
     MouseArea {
+        id: mouse
+        hoverEnabled: true
         anchors.fill: parent
         onClicked: toggle()
     }
@@ -28,11 +28,11 @@ Rectangle {
         anchors.centerIn: parent
         spacing: 2
         Text {
-            text: "󰐥"
+            text: ""
             color: Config.colors.text
-            font.pixelSize: 17
+            font.pixelSize: 12
             topPadding: -2
-            rightPadding: -2
+            leftPadding: 1.5
         }
     }
     PanelWindow {
@@ -44,7 +44,7 @@ Rectangle {
         }
         visible: false
         exclusiveZone: 0
-        color: Qt.alpha(Config.colors.bgDark, 0.5)
+        color: Qt.alpha(Config.colors.bg, 1)
         BackgroundEffect.blurRegion: Region {
             item: menu.contentItem
         }

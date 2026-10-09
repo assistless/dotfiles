@@ -1,0 +1,1 @@
+/home/demi/Configuration/dotfiles/Quickshell/Config.qml

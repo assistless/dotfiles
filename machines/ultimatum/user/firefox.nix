@@ -2,7 +2,7 @@
 {
   programs.firefox = {
     enable = true;
-    package = pkgs.firefox-esr-140;
+    package = pkgs.firefox;
     profiles.default = {};
   };
 }

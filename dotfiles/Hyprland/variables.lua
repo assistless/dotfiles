@@ -7,4 +7,4 @@ hl.env("HYPRCURSOR_SIZE", "24")
 
 global terminal    = "kitty"
 global fileManager = "thunar"
-global menu        = "qs ipc call launcher toggle"
+global menu        = "qs -p ~/.config/quickshell/standalone/AppLauncher.qml"

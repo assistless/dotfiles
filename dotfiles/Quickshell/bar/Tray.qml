@@ -5,7 +5,7 @@ import QtQuick.Controls
 import Quickshell
 import Quickshell.Widgets
 import Quickshell.Services.SystemTray
-import "../config.js" as Config
+import qs
 
 Column {
     spacing: 12

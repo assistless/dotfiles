@@ -1,108 +1,70 @@
-import Quickshell
-import Quickshell.Wayland
-import qs.modules
 import QtQuick
 import QtQuick.Layouts
-import "../config.js" as Config
+import Quickshell
+import qs
+import qs.services
+
+// import qs.modules
 
 Scope {
-    Variants {
-        model: Quickshell.screens
-        PanelWindow {
-            id: barRight
-            required property var modelData
-            screen: modelData
+    PanelWindow {
+        id: vertical
+        anchors {
+            top: Config.bar.verticalPosition == "top" ? true : false
+            left: true
+            right: true
+            bottom: Config.bar.verticalPosition == "bottom" ? true : false
+        }
+        implicitHeight: Config.bar.verticalSize
+        Rectangle {
+            id: verticalContent
+            anchors.fill: parent
+            color: Config.colors.bg
+            RowLayout {
+                anchors.fill: parent
+                anchors.leftMargin: 5
+                anchors.rightMargin: 5
 
-            anchors {
-                top: true
-                right: true
-                bottom: true
+                Windows {
+                    Layout.alignment: Qt.AlignLeft
+                }
+                Item {
+                    Layout.fillWidth: true
+                }
+                SearchButton {}
             }
-            BackgroundEffect.blurRegion: Region { item: barRight.contentItem }
-            color: Qt.alpha(Config.colors.bgDark, 0.5)
-            implicitWidth: 30
+        }
+        RowLayout {
+            anchors.centerIn: parent
+            Clock {}
+        }
+    }
+    PanelWindow {
+        id: horizontal
+        anchors {
+            top: true
+            left: Config.bar.horizontalPosition == "left" ? true : false
+            right: Config.bar.horizontalPosition == "right" ? true : false
+            bottom: true
+        }
+        implicitWidth: Config.bar.horizontalSize
+        Rectangle {
+            id: horizontalContent
+            anchors.fill: parent
+            color: Config.colors.bg
             ColumnLayout {
                 anchors.fill: parent
-                spacing: 10
+                anchors.bottomMargin: 10
                 Workspaces {
-                    Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
-                    Layout.topMargin: 6
+                    Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
                 }
                 Item {
                     Layout.fillHeight: true
                 }
                 Tray {
-                    Layout.alignment: Qt.AlignHCenter | Qt.AlignBottom
-                }
-                Volume {
-                    Layout.alignment: Qt.AlignHCenter | Qt.AlignBottom
-                    Layout.bottomMargin: 6
+                    Layout.alignment: Qt.AlignBottom | Qt.AlignHCenter
                 }
             }
-        }
-    }
-    Variants {
-        model: Quickshell.screens
-        PanelWindow {
-            id: barTop
-            required property var modelData
-            screen: modelData
-            BackgroundEffect.blurRegion: Region { item:barTop.contentItem }
-            anchors {
-                top: true
-                left: true
-                right: true
-            }
-                
-            color: Qt.alpha(Config.colors.bgDark, 0.5)
-            implicitHeight: 25
-            Text {
-                id: clockText
-                text: Time.fullDisplay
-                color: Config.colors.text
-                anchors.centerIn: parent
-            }
-            RowLayout {
-                anchors.fill: parent
-                spacing: 5
-                Item {
-                    Layout.fillWidth: true
-                }
-                Search {
-                    Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
-                }
-                NotificationCenter {
-                    Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
-                    Layout.rightMargin: 0
-                }
-                Power {
-                    Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
-                }
-            }
-        }
-    }
-    component Compartment: Rectangle {
-        id: compartment
-
-        default property alias content: container.children
-
-        property real horizontalPadding: 8
-        property real verticalPadding: 4
-        property real contentSpacing: 6
-
-        color: Config.colors.bgDark
-        border.color: Config.colors.border
-        border.width: 1
-
-        Layout.fillHeight: true
-
-        implicitWidth: container.implicitWidth + (horizontalPadding * 2)
-        implicitHeight: container.implicitHeight + (verticalPadding * 2)
-
-        RowLayout {
-            id: container
-            anchors.centerIn: parent
-            spacing: compartment.contentSpacing
         }
     }
 }

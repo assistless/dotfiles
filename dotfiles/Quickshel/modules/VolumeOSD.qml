@@ -44,7 +44,7 @@ Scope {
             anchors.top: true
             margins.top: 0
             exclusiveZone: 0
-
+            WlrLayershell.layer: WlrLayer.Overlay
             implicitWidth: 400
             implicitHeight: 50
             color: "transparent"
@@ -52,14 +52,14 @@ Scope {
             // An empty click mask prevents the window from blocking mouse events.
             mask: Region {}
             Rectangle {
+                id: osd
                 anchors.fill: parent
                 color: Qt.alpha(Config.colors.bgDark, 0.5)
-                id: osd
                 RowLayout {
                     anchors {
                         fill: parent
                         leftMargin: 10
-                        rightMargin: 15
+                        rightMargin: 18
                     }
 
                     IconImage {
@@ -71,7 +71,7 @@ Scope {
                         // Stretches to fill all left-over space
                         Layout.fillWidth: true
 
-                        implicitHeight: 10
+                        implicitHeight: 20
                         color: Config.colors.textMuted
 
                         Rectangle {
@@ -83,6 +83,12 @@ Scope {
                             color: Config.colors.text
                             implicitWidth: parent.width * (Pipewire.defaultAudioSink?.audio.volume ?? 0)
                         }
+                    }
+                    Text {
+                        Layout.alignment: Qt.AlignRight
+                        Layout.maximumWidth: 25
+                        text: Math.round((Pipewire.defaultAudioSink?.audio.volume ?? 0) * 100) + "%"
+                        color: Config.colors.text
                     }
                 }
             }

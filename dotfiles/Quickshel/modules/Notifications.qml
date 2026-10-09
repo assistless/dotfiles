@@ -13,7 +13,7 @@ Scope {
     property bool centerOpen: false
     ListModel {
         id: history
-        onCountChanged: NotificationCount.count = history.count
+        onCountChanged: Globals.notificationCount = history.count
     }
     NotificationServer {
         id: server
@@ -37,6 +37,7 @@ Scope {
         target: "notifications"
         function toggle(): void {
             root.centerOpen = !root.centerOpen;
+            Globals.notificationsVisible = root.centerOpen
         }
     }
     // notification center
@@ -48,12 +49,13 @@ Scope {
             left: true
             right: true
         }
+        
         exclusiveZone: 0
         color: "transparent"
         visible: root.centerOpen
         MouseArea {
             anchors.fill: parent
-            onClicked: ipc.hide()
+            onClicked: ipc.toggle()
         }
 
         PanelWindow {
@@ -241,7 +243,7 @@ Scope {
             top: 8
             right: 8
         }
-
+        WlrLayershell.layer: WlrLayer.Overlay
         implicitWidth: 380
         implicitHeight: Math.max(1, column.implicitHeight)
 

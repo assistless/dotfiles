@@ -10,10 +10,7 @@
 }:
 
 {
-  boot.kernelPackages = pkgs.linuxPackages_latest;
-  networking.extraHosts = ''
-    192.168.1.14  volcanic.local  volcanic
-  '';
+  services.tailscale.enable = true;
 
   services.gvfs.enable = true;
   programs.fuse.userAllowOther = true;
@@ -70,13 +67,6 @@
 
   # touchpad
   services.libinput.enable = true;
-
-  # misc
-  programs.mtr.enable = true;
-  programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = true;
-  };
 
   # ssh
   services.openssh.enable = true;

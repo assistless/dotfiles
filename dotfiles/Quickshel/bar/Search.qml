@@ -7,26 +7,26 @@ import "../config.js" as Config
 
 Rectangle {
     id: root
-    color: Qt.alpha(Config.colors.bg, 0.5)
-    implicitHeight: 20
-    implicitWidth: 20
-    border {
-        color: Config.colors.border
-        width: 1
-    }
+    color: Globals.launcherVisible ? Config.colors.accentDark : mouse.containsPress ? Qt.alpha(Config.colors.accentDark, 1) : mouse.containsMouse ? Qt.alpha(Config.colors.accent, 1) : Qt.alpha(Config.colors.bg, 1)
+    implicitHeight: 19
+    implicitWidth: 19
+    radius: 10
     RowLayout {
         id: layout
         anchors.centerIn: parent
         spacing: 2
         Text {
-            text: "󰍉"
+            text: ""
             color: Config.colors.text
-            font.pixelSize: 16
+            font.pixelSize: 12
             topPadding: -1
+            leftPadding: 1
         }
     }
     MouseArea {
+        id: mouse
         anchors.fill: parent
+        hoverEnabled: true
         onClicked: Quickshell.execDetached(["qs", "ipc", "call", "launcher", "toggle"])
     }
 }

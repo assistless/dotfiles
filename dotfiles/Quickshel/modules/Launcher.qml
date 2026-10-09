@@ -5,6 +5,7 @@ import Quickshell
 import Quickshell.Widgets
 import Quickshell.Wayland
 import Quickshell.Io
+import qs.services
 import "../config.js" as Config
 
 PanelWindow {
@@ -26,10 +27,12 @@ PanelWindow {
     function hide() {
         root.visible = false;
         search.text = "";
+        Globals.launcherVisible = root.visible
     }
     function show() {
         root.visible = true;
         search.forceActiveFocus();
+        Globals.launcherVisible = root.visible
     }
     IpcHandler {
         target: "launcher"
@@ -38,6 +41,9 @@ PanelWindow {
                 root.hide();
             else
                 root.show();
+        }
+        function query(): bool {
+            return root.visible
         }
     }
 
@@ -56,20 +62,12 @@ PanelWindow {
             right: true
             bottom: true
         }
-        margins {
-            top: 0
-            right: 0
-            bottom: 0
-        }
         visible: root.visible
         WlrLayershell.keyboardFocus: root.visible ? WlrKeyboardFocus.OnDemand : WlrKeyboardFocus.None // grab keyboard focus
         WlrLayershell.layer: WlrLayer.Overlay
         exclusiveZone: 0
         implicitWidth: 380
-        color: Qt.alpha(Config.colors.bgDark, 0.5)
-        BackgroundEffect.blurRegion: Region {
-            item: launcher.contentItem
-        }
+        color: Config.colors.bg
         MouseArea {
             anchors.fill: parent
             onClicked: {} // eat clicks so they don't fall through
@@ -135,8 +133,8 @@ PanelWindow {
 
                         IconImage {
                             source: Quickshell.iconPath(modelData.icon, true)
-                            implicitWidth: 20
-                            implicitHeight: 20
+                            implicitWidth: 24
+                            implicitHeight: 24
                             Layout.alignment: Qt.AlignVCenter
                         }
 

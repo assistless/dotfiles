@@ -102,7 +102,8 @@ hl.window_rule({
 })
 hl.window_rule({
     name = "no peaking",
-    match = { class = "^firefox-esr$" },
+    match = { class = "^firefox$", title = "^Picture-in-Picture$" },
 
-    no_screen_share = true,
+    float = true,
+    pin = true
 })
